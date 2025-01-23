@@ -1,24 +1,8 @@
 import '../styles/Home.css';
+import ArticleCard from '../components/ArticleCard';
+import { articles } from '../data/Articles';
 
 const Home = () => {
-  const articles = [
-    {
-      id: 1,
-      title: 'Article 1',
-      content: 'This is the content of article 1.',
-    },
-    {
-      id: 2,
-      title: 'Article 2',
-      content: 'This is the content of article 2.',
-    },
-    {
-      id: 3,
-      title: 'Article 3',
-      content: 'This is the content of article 3.',
-    },
-  ]
-
   return (
     <div className="home">
       <header className="home-header">
@@ -39,24 +23,6 @@ const Home = () => {
       </main>
     </div>
   )
-}
-
-import PropTypes from 'prop-types';
-
-const ArticleCard = ({ article }) => {
-  return (
-    <div className="article-card">
-      <h2>{article.title}</h2>
-      <p>{article.content}</p>
-    </div>
-  )
-}
-
-ArticleCard.propTypes = {
-  article: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  }).isRequired,
 }
 
 export default Home;
