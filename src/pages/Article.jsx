@@ -1,18 +1,26 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { articles } from '../data/Articles';
 import '../styles/Article.css';
+import ArticleEditor from '../components/ArticleEditor';
 
 const Article = () => {
   const { id } = useParams();
-  const article = articles.find((article) => article.id === Number(id));
+  const navigate = useNavigate();
+  const [articleData, setArticleData] = useState(
+    articles.find((article) => article.id === parseInt(id))
+  );
+
+  const handleSave = (updatedArticle) => {
+    console.log('Updated article:', updatedArticle.content);
+    setArticleData(updatedArticle);
+    navigate(`/article/${id}`);
+  }
 
   return (
     <div className="article">
-      {article ? (
-        <>
-          <h1>{article.title}</h1>
-          <p>{article.content}</p>
-        </>
+      {articleData ? (
+        <ArticleEditor article={articleData} onSave={handleSave} />
       ) : (
         <p>Article not found</p>
       )}
