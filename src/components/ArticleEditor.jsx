@@ -11,8 +11,10 @@ const ArticleEditor = ({ article, onSave }) => {
     console.log('newContent:', newContent);
   };
   
-  const handleSave = () => {
-    onSave({ ...article, content });
+  const handleSave = async () => {
+    const updatedArticle = {...article, content};
+    await onSave(updatedArticle);
+    alert('Article saved!');
   };
 
   return (

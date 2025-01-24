@@ -48,10 +48,23 @@ const Article = () => {
     articles.find((article) => article.id === parseInt(id))
   );
 
-  const handleSave = (updatedArticle) => {
+  // const handleSave = (updatedArticle) => {
+  //   console.log('Updated article:', updatedArticle.content);
+  //   setArticleData(updatedArticle);
+  //   navigate(`/article/${id}`);
+  // }
+
+  const handleSave = async (updatedArticle) => {
     console.log('Updated article:', updatedArticle.content);
     setArticleData(updatedArticle);
     navigate(`/article/${id}`);
+
+    try {
+      const docRef = await addDoc(collection(db, 'articles'), updatedArticle);
+      console.log('Document written with ID:', docRef.id);
+    } catch (e) {
+      console.error('Error adding document:', e);
+    }
   }
 
 
