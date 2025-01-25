@@ -60,3 +60,18 @@
   font-size: 0.9rem;
   color: #777;
 }
+
+.create-article-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.create-article-button:hover {
+  background-color: #45a049;
+}

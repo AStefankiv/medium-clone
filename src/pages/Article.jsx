@@ -1,58 +1,30 @@
-// import { useParams, useNavigate } from 'react-router-dom';
-// import { useState } from 'react';
-// import { articles } from '../data/Articles';
-// import '../styles/Article.css';
-// import ArticleEditor from '../components/ArticleEditor';
-
-// const Article = () => {
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-//   const [articleData, setArticleData] = useState(
-//     articles.find((article) => article.id === parseInt(id))
-//   );
-
-//   const handleSave = (updatedArticle) => {
-//     console.log('Updated article:', updatedArticle.content);
-//     setArticleData(updatedArticle);
-//     navigate(`/article/${id}`);
-//   }
-
-//   return (
-//     <div className="article">
-//       {articleData ? (
-//         <ArticleEditor article={articleData} onSave={handleSave} />
-//       ) : (
-//         <p>Article not found</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Article;
-
-
-
-
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { articles } from '../data/Articles';
+import { useState, useEffect } from 'react';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import '../styles/Article.css';
 import ArticleEditor from '../components/ArticleEditor';
-import { collection, addDoc } from 'firebase/firestore';
 import db from '../firebase/firebase';
 
 const Article = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [articleData, setArticleData] = useState(
-    articles.find((article) => article.id === parseInt(id))
-  );
+  const [articleData, setArticleData] = useState(null);
 
-  // const handleSave = (updatedArticle) => {
-  //   console.log('Updated article:', updatedArticle.content);
-  //   setArticleData(updatedArticle);
-  //   navigate(`/article/${id}`);
-  // }
+  useEffect(() => {
+    const fetchArticle = async () => {
+      const docRef = (doc(db, 'articles', id));
+      console.log('docRef:', docRef);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setArticleData({ id: docSnap.id, ...docSnap.data() });
+      } else {
+        console.log('No such document!');
+      }
+    };
+
+    fetchArticle();
+  }, [id]);
 
   const handleSave = async (updatedArticle) => {
     console.log('Updated article:', updatedArticle.content);
@@ -60,19 +32,24 @@ const Article = () => {
     navigate(`/article/${id}`);
 
     try {
-      const docRef = await addDoc(collection(db, 'articles'), updatedArticle);
-      console.log('Document written with ID:', docRef.id);
+      const docRef = doc(db, 'articles', id);
+      await setDoc(docRef, updatedArticle);
+      console.log('Article updated in Firebase:', docRef.id);
     } catch (e) {
-      console.error('Error adding document:', e);
+      console.error('Error updating article:', e);
     }
-  }
+  };
 
 
 
   return (
     <div className="article">
       {articleData ? (
-        <ArticleEditor article={articleData} onSave={handleSave} />
+        <>
+          <h1 className="article-title">{articleData.title}</h1>
+          <p className="article-description">{articleData.description}</p>
+          <ArticleEditor article={articleData} onSave={handleSave} />
+        </>
       ) : (
         <p>Article not found</p>
       )}

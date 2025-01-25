@@ -1,12 +1,14 @@
 import '../styles/Home.css';
 import ArticleCard from '../components/ArticleCard';
-import { articles } from '../data/Articles';
+// import { articles } from '../data/Articles';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase/firebase';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
+  const navigate = useNavigate();
 
   const fetchArticles = async () => {
     const querySnapshot = await getDocs(collection(db, 'articles'));
@@ -25,11 +27,17 @@ const Home = () => {
     loadArticles();
   }, []);
 
+  const handleCreateArticle = async () => {
+    navigate('/craete-article');
+  }
+
   return (
     <div className="home">
       <header className="home-header">
         <h1>Welcome to Medium Clone</h1>
         <p>Explore articles, stories, and ideas from the community.</p>
+
+        <button onClick={handleCreateArticle}>Create Article</button>
       </header>
 
       <main className="home-main">
