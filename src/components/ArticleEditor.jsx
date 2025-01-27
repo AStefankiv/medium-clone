@@ -3,22 +3,23 @@ import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import '../styles/ArticleEditor.css';
 
-const ArticleEditor = ({ article, onSave, onCancel }) => {
+const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [content, setContent] = useState(article ? article.content : '');
   const [title, setTitle] = useState(article ? article.title : '');
   const [description, setDescription] = useState(article ? article.description : '');
+  const [date, setDate] = useState(article ? article.date : new Date().toLocaleDateString());
 
   const handleEditorChange = (newContent) => {
     setContent(newContent);
-    console.log('newContent:', newContent);
   };
   
   const handleSave = async () => {
     const updatedArticle = {
-      id: article ? article.id : Date.now(),
+      id: article ? article.id : title.toLowerCase().replace(/[^a-z0-9-]/g, ''),
       title,
       description,
       content,
+      date,
     };
     await onSave(updatedArticle);
     alert('Article saved successfully!');
@@ -28,11 +29,17 @@ const ArticleEditor = ({ article, onSave, onCancel }) => {
     onCancel();
   };
 
+  const handleDelete = async () => {
+    await onDelete(article.id);
+    alert('Article deleted successfully!');
+  };
+
   useEffect(() => {
     if (article) {
       setContent(article.content);
       setTitle(article.title);
       setDescription(article.description);
+      setDate(article.date);
     }
   }, [article]);
 
@@ -76,6 +83,7 @@ const ArticleEditor = ({ article, onSave, onCancel }) => {
       <div className="save-cancel-buttons">
         <button onClick={handleSave}>💾 Save Article</button>
         <button onClick={handleCancel}>❌ Cancel</button>
+        <button onClick={handleDelete}>🗑️ Delete Article</button>
       </div>
     </div>
   );
@@ -83,13 +91,15 @@ const ArticleEditor = ({ article, onSave, onCancel }) => {
 
 ArticleEditor.propTypes = {
   article: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  }).isRequired,
+    id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    content: PropTypes.string,
+    date: PropTypes.string,
+  }),
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 }
 
 export default ArticleEditor;

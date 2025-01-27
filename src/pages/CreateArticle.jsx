@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import ArticleEditor from '../components/ArticleEditor';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import db from '../firebase/firebase';
 import '../styles/CreateArticle.css';
 
@@ -8,20 +8,42 @@ const CreateArticle = () => {
   const navigate = useNavigate();
 
   const handleSave = async (newArticle) => {
+
+    const slugify = (title) => {
+      return title
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-+/, '')
+    };
+    
     try {
-      // Save the new article to Firebase Firestore
-      const docRef = await addDoc(collection(db, 'articles'), newArticle);
-      console.log('New article added with ID:', docRef.id);
-      alert('Article created successfully!');
-      navigate('/'); // Redirect to the homepage or any desired route
+      const slug = slugify(newArticle.title);
+      const docRef = doc(db, 'articles', slug);
+    
+      const updatedArticle = {
+      title: newArticle.title || 'Untitled',
+      description: newArticle.description || 'No description',
+      content: newArticle.content || '<p>No content</p>',
+      date: new Date().toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      }),
+    };
+
+    await setDoc(docRef, updatedArticle);
+      navigate('/');
+
     } catch (error) {
-      console.error('Error adding article:', error);
+      console.error('Error adding article:', error.message);
       alert('Failed to create the article. Please try again.');
     }
   };
 
   const handleCancel = () => {
-    navigate('/'); // Redirect to the homepage or any desired route
+    navigate('/');
   };
 
   return (

@@ -1,5 +1,5 @@
 .create-article-page {
-  width: 97%;
+  width: 95%;
   margin: 0 auto;
   margin-top: 15px;
   padding-top: 10px;
@@ -11,4 +11,6 @@
 .create-article-page h1 {
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 2rem;
 }

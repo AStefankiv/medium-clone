@@ -1,15 +1,17 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import '../styles/Article.css';
 import ArticleEditor from '../components/ArticleEditor';
 import db from '../firebase/firebase';
 import DOMPurify from 'dompurify';
+import { useNavigate } from 'react-router-dom';
 
 const Article = () => {
   const { id } = useParams();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -47,6 +49,17 @@ const Article = () => {
     setIsEditing(false);
   };
 
+  const handleDelete = async () => {
+    try {
+      const docRef = doc(db, 'articles', id);
+      await deleteDoc(docRef);
+      console.log('Document deleted successfully!');
+      navigate('/');
+    } catch (e) {
+      console.error('Error deleting article:', e);
+    }
+  };
+
   return (
     <div className="article">
       {articleData ? (
@@ -67,7 +80,7 @@ const Article = () => {
           </div>
         ) : (
           <div className='edit-mode'>
-            <ArticleEditor article={articleData} onSave={handleSave} onCancel={handleCancelEdit} />
+            <ArticleEditor article={articleData} onSave={handleSave} onCancel={handleCancelEdit} onDelete={handleDelete} />
             </div>
         )}
         </>
