@@ -35,6 +35,7 @@ const ArticleEditor = ({ article, onSave }) => {
   return (
     <div className="article-editor">
 
+    <div className="title-description">
       <input
         type="text"
         value={title}
@@ -48,6 +49,7 @@ const ArticleEditor = ({ article, onSave }) => {
         onChange={(e) => setDescription(e.target.value)}
         className='article-description'
       />
+    </div>
 
       <Editor
         apiKey="ya17n7heyu718a0qj9q0uug85h1jiucgqc4yi15ln56o4itu"

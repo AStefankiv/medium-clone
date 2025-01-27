@@ -1,6 +1,5 @@
 import '../styles/Home.css';
 import ArticleCard from '../components/ArticleCard';
-// import { articles } from '../data/Articles';
 import { collection, getDocs } from 'firebase/firestore';
 import db from '../firebase/firebase';
 import { useEffect, useState } from 'react';

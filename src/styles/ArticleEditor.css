@@ -2,10 +2,15 @@
   width: 97%;
   margin: 0 auto;
   margin-top: 15px;
-  padding-top: 20px;
+  padding-top: 10px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+.title-description {
+  display: flex;
+  flex-direction: column;
 }
 
 .save-button {

@@ -4,11 +4,13 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import '../styles/Article.css';
 import ArticleEditor from '../components/ArticleEditor';
 import db from '../firebase/firebase';
+import DOMPurify from 'dompurify';
 
 const Article = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [articleData, setArticleData] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -27,28 +29,52 @@ const Article = () => {
   }, [id]);
 
   const handleSave = async (updatedArticle) => {
-    console.log('Updated article:', updatedArticle.content);
-    setArticleData(updatedArticle);
-    navigate(`/article/${id}`);
-
+    // navigate(`/article/${id}`);
+    
     try {
       const docRef = doc(db, 'articles', id);
       await setDoc(docRef, updatedArticle);
-      console.log('Article updated in Firebase:', docRef.id);
+      setArticleData(updatedArticle);
+      setIsEditing(false);
+      console.log('Document updated successfully!');
     } catch (e) {
       console.error('Error updating article:', e);
     }
   };
 
+  const handleToggleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
 
 
   return (
     <div className="article">
       {articleData ? (
         <>
-          <h1 className="article-title">{articleData.title}</h1>
-          <p className="article-description">{articleData.description}</p>
-          <ArticleEditor article={articleData} onSave={handleSave} />
+        {!isEditing ? (
+          <div className='read-mode'>
+            <h1 className="article-title">{articleData.title}</h1>
+            <p className="article-description">{articleData.description}</p>
+
+            <div
+                className="article-content"
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(articleData.content),
+                }}
+              ></div>
+            
+            <button onClick={handleToggleEdit}>Edit</button>
+          </div>
+        ) : (
+          <div className='edit-mode'>
+            <ArticleEditor article={articleData} onSave={handleSave} />
+            <button onClick={handleCancelEdit}>Cancel</button>
+            </div>
+        )}
         </>
       ) : (
         <p>Article not found</p>
