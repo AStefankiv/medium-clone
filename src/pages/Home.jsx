@@ -27,7 +27,7 @@ const Home = () => {
   }, []);
 
   const handleCreateArticle = async () => {
-    navigate('/craete-article');
+    navigate('/create-article');
   }
 
   return (
@@ -36,7 +36,7 @@ const Home = () => {
         <h1>Welcome to Medium Clone</h1>
         <p>Explore articles, stories, and ideas from the community.</p>
 
-        <button onClick={handleCreateArticle}>Create Article</button>
+        <button onClick={handleCreateArticle}>📝 Create Article</button>
       </header>
 
       <main className="home-main">

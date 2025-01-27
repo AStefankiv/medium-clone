@@ -28,3 +28,9 @@
 .save-button:hover {
   background-color: #005fa3;
 }
+
+.save-cancel-buttons {
+  display: flex;
+  justify-content:center;
+  gap: 10px;
+}

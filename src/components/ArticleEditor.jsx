@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import '../styles/ArticleEditor.css';
 
-const ArticleEditor = ({ article, onSave }) => {
+const ArticleEditor = ({ article, onSave, onCancel }) => {
   const [content, setContent] = useState(article ? article.content : '');
   const [title, setTitle] = useState(article ? article.title : '');
   const [description, setDescription] = useState(article ? article.description : '');
@@ -22,6 +22,10 @@ const ArticleEditor = ({ article, onSave }) => {
     };
     await onSave(updatedArticle);
     alert('Article saved successfully!');
+  };
+
+  const handleCancel = () => {
+    onCancel();
   };
 
   useEffect(() => {
@@ -69,7 +73,10 @@ const ArticleEditor = ({ article, onSave }) => {
         }}
         onEditorChange={handleEditorChange}
       />
-      <button onClick={handleSave}>Save Article</button>
+      <div className="save-cancel-buttons">
+        <button onClick={handleSave}>💾 Save Article</button>
+        <button onClick={handleCancel}>❌ Cancel</button>
+      </div>
     </div>
   );
 }
@@ -82,6 +89,7 @@ ArticleEditor.propTypes = {
     content: PropTypes.string.isRequired,
   }).isRequired,
   onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 }
 
 export default ArticleEditor;

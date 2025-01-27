@@ -1,0 +1,14 @@
+.create-article-page {
+  width: 97%;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding-top: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.create-article-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}

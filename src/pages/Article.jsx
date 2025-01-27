@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import '../styles/Article.css';
@@ -8,7 +8,6 @@ import DOMPurify from 'dompurify';
 
 const Article = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -29,8 +28,6 @@ const Article = () => {
   }, [id]);
 
   const handleSave = async (updatedArticle) => {
-    // navigate(`/article/${id}`);
-    
     try {
       const docRef = doc(db, 'articles', id);
       await setDoc(docRef, updatedArticle);
@@ -50,7 +47,6 @@ const Article = () => {
     setIsEditing(false);
   };
 
-
   return (
     <div className="article">
       {articleData ? (
@@ -67,12 +63,11 @@ const Article = () => {
                 }}
               ></div>
             
-            <button onClick={handleToggleEdit}>Edit</button>
+            <button onClick={handleToggleEdit}>✏️ Edit</button>
           </div>
         ) : (
           <div className='edit-mode'>
-            <ArticleEditor article={articleData} onSave={handleSave} />
-            <button onClick={handleCancelEdit}>Cancel</button>
+            <ArticleEditor article={articleData} onSave={handleSave} onCancel={handleCancelEdit} />
             </div>
         )}
         </>

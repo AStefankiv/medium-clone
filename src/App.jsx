@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Article from './pages/Article';
+import CreateArticle from './pages/CreateArticle';
 import './App.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/create-article" element={<CreateArticle />} />
           <Route path="/login" element={<Login />} />
           <Route path="/article/:id" element={<Article />} />
         </Routes>
