@@ -91,3 +91,8 @@ button:hover {
 .article-content em {
   font-style: italic;
 }
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+}

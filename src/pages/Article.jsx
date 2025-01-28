@@ -75,8 +75,9 @@ const Article = () => {
                   __html: DOMPurify.sanitize(articleData.content),
                 }}
               ></div>
-            
+            <div className='edit-button'>
             <button onClick={handleToggleEdit}>✏️ Edit</button>
+            </div>
           </div>
         ) : (
           <div className='edit-mode'>

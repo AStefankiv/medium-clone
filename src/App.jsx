@@ -10,14 +10,16 @@ import './App.css'
 function App() {
   return (
     <Router>
-      <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create-article" element={<CreateArticle />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/article/:id" element={<Article />} />
-        </Routes>
-      <Footer />
+        <Header />
+          <div className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create-article" element={<CreateArticle />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/article/:id" element={<Article />} />
+            </Routes>
+          </div>
+        <Footer />
     </Router>
   )
 }
