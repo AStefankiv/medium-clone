@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import ArticleEditor from '../components/ArticleEditor';
 import { doc, setDoc } from 'firebase/firestore';
-import db from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 import '../styles/CreateArticle.css';
 
 const CreateArticle = () => {

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import '../styles/Article.css';
 import ArticleEditor from '../components/ArticleEditor';
-import db from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import '../styles/Home.css';
 import ArticleCard from '../components/ArticleCard';
 import { collection, getDocs } from 'firebase/firestore';
-import db from '../firebase/firebase';
+import { db } from '../firebase/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
