@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import LogoutButton from './components/LogoutButton';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
 
@@ -34,7 +33,6 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/article/:id" element={<Article />} />
             </Routes>
-              <LogoutButton />
           </div>
         <Footer />
     </Router>
