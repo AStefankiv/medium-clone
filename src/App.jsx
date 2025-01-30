@@ -29,7 +29,6 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-
               <Route path="/" element={<Home />} />
               <Route path="/create-article" element={<CreateArticle />} />
               <Route path="/login" element={<Login />} />
