@@ -36,7 +36,9 @@ const Home = () => {
         <h1>Welcome to Medium Clone</h1>
         <p>Explore articles, stories, and ideas from the community.</p>
 
-        <button onClick={handleCreateArticle}>📝 Create Article</button>
+        <div className="home-header__create-article">
+          <button onClick={handleCreateArticle}>📝 Create Article</button>
+        </div>
       </header>
 
       <main className="home-main">

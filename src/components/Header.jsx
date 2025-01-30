@@ -15,8 +15,13 @@ const Header = () => {
         <a href="/login" className="header__button">🔒 Login</a>
       </div>
       ) : (
-        <div className="header__right">
-          <LogoutButton />
+        <div className="header__user">
+          <div className="user-info">
+            <p>{user.email}</p>
+          </div>
+          <div className="header__right">
+            <LogoutButton />
+          </div>
         </div>
       )}
     </header>

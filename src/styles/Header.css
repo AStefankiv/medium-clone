@@ -35,3 +35,22 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.header__user {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.user-info {
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.user-info p {
+  color: #010d94;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

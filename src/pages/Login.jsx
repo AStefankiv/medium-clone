@@ -15,6 +15,9 @@ const Login = () => {
     try {
       await signIn(email, password);
       setError('');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 3000);
     } catch (error) {
       setError(error.message);
     }
@@ -68,8 +71,8 @@ const Login = () => {
     </form>
       ) : (
       <>
-        <p className='logged-in'>User {user.email} signed in.</p>
-        <button onClick={handleLogOut}>Sign Out</button>
+        <p className='logged-in'>User <span className="user-email">{user.email}</span> signed in</p>
+        <button onClick={handleLogOut}>🔓 Sign Out</button>
       </>
     )}
     {error && <p className='error'>{error}</p>}

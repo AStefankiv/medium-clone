@@ -4,7 +4,6 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
-
 import Login from './pages/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
