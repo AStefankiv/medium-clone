@@ -2,6 +2,7 @@
   width: 97%;
   margin: 0 auto;
   margin-top: 15px;
+  margin-bottom: 15px;
   padding-top: 10px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -13,25 +14,10 @@
   flex-direction: column;
 }
 
-.save-button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 20px;
-  background-color: #0077cc;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.save-button:hover {
-  background-color: #005fa3;
-}
-
 .save-cancel-buttons {
   display: flex;
-  justify-content:center;
   gap: 10px;
   width: 31%;
+  margin: 20px auto;
+  margin-bottom: 10px;
 }
