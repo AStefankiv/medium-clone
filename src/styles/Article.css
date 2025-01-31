@@ -94,5 +94,7 @@ button:hover {
 
 .edit-button {
   display: flex;
-  justify-content: center;
+  width: 5%;
+  gap: 10px;
+  margin: 20px auto;
 }
