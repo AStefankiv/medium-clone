@@ -13,7 +13,7 @@ const Home = () => {
     const querySnapshot = await getDocs(collection(db, 'articles'));
     const articles = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
     return articles;
   }

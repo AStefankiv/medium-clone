@@ -8,6 +8,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [title, setTitle] = useState(article ? article.title : '');
   const [description, setDescription] = useState(article ? article.description : '');
   const [date, setDate] = useState(article ? article.date : new Date().toLocaleDateString());
+  const [author, setAuthor] = useState(article ? article.author : '');
 
   const handleEditorChange = (newContent) => {
     setContent(newContent);
@@ -20,6 +21,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       description,
       content,
       date,
+      author,
     };
     await onSave(updatedArticle);
     alert('Article saved successfully!');
@@ -40,6 +42,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       setTitle(article.title);
       setDescription(article.description);
       setDate(article.date);
+      setAuthor(article.author);
     }
   }, [article]);
 
@@ -96,6 +99,7 @@ ArticleEditor.propTypes = {
     description: PropTypes.string,
     content: PropTypes.string,
     date: PropTypes.string,
+    author: PropTypes.string,
   }),
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

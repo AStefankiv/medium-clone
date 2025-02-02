@@ -3,8 +3,10 @@ import ArticleEditor from '../components/ArticleEditor';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import '../styles/CreateArticle.css';
+import { useAuth } from '../context/AuthContext';
 
 const CreateArticle = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const handleSave = async (newArticle) => {
@@ -31,6 +33,7 @@ const CreateArticle = () => {
         day: 'numeric',
         year: 'numeric',
       }),
+      author: user ? { id: user.uid, email: user.email } : null,
     };
 
     await setDoc(docRef, updatedArticle);
