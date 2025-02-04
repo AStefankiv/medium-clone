@@ -4,10 +4,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const fetchArticles = async () => {
     const querySnapshot = await getDocs(collection(db, 'articles'));
@@ -37,7 +39,9 @@ const Home = () => {
         <p>Explore articles, stories, and ideas from the community.</p>
 
         <div className="home-header__create-article">
-          <button onClick={handleCreateArticle}>📝 Create Article</button>
+          {user && (
+            <button onClick={handleCreateArticle}>📝 Create Article</button>
+          )}
         </div>
       </header>
 
