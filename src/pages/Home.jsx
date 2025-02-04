@@ -39,9 +39,7 @@ const Home = () => {
         <p>Explore articles, stories, and ideas from the community.</p>
 
         <div className="home-header__create-article">
-          {user && (
-            <button onClick={handleCreateArticle}>📝 Create Article</button>
-          )}
+          <button onClick={handleCreateArticle}>📝 Create Article</button>
         </div>
       </header>
 
