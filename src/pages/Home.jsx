@@ -4,12 +4,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const fetchArticles = async () => {
     const querySnapshot = await getDocs(collection(db, 'articles'));

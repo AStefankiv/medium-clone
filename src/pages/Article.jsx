@@ -29,7 +29,6 @@ const Article = () => {
       } else {
         console.log('No such document!');
       }
-      console.log('User:', user);
     };
 
     if (user !== undefined) {
@@ -54,7 +53,6 @@ const Article = () => {
       setIsEditing(true);
     else
       alert('You are not authorized to edit this article');
-    // setIsEditing(true);
   };
 
   const handleCancelEdit = () => {
