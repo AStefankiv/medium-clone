@@ -7,11 +7,15 @@ import { db } from '../firebase/firebase';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../context/AuthContext';
+
 const Article = () => {
   const { id } = useParams();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -21,13 +25,17 @@ const Article = () => {
 
       if (docSnap.exists()) {
         setArticleData({ id: docSnap.id, ...docSnap.data() });
+        console.log('Article data:', articleData);
       } else {
         console.log('No such document!');
       }
+      console.log('User:', user);
     };
 
-    fetchArticle();
-  }, [id]);
+    if (user !== undefined) {
+      fetchArticle();
+    }
+  }, [id, user]);
 
   const handleSave = async (updatedArticle) => {
     try {
@@ -42,7 +50,11 @@ const Article = () => {
   };
 
   const handleToggleEdit = () => {
-    setIsEditing(true);
+    if (user && user.uid === articleData.author.id)
+      setIsEditing(true);
+    else
+      alert('You are not authorized to edit this article');
+    // setIsEditing(true);
   };
 
   const handleCancelEdit = () => {
