@@ -1,6 +1,35 @@
+.article-card p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
 .article-card-footer {
   display: flex;
-  justify-content: center;
-  align-items:center;
-  gap: 4rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.article-card a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .article-card {
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .article-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 }
