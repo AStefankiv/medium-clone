@@ -1,6 +1,6 @@
 import '../styles/Home.css';
 import ArticleCard from '../components/ArticleCard';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const fetchArticles = async () => {
-    const querySnapshot = await getDocs(collection(db, 'articles'));
+    const q = query(collection(db, 'articles'), orderBy('date', 'desc'));
+    const querySnapshot = await getDocs(q);
     const articles = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),

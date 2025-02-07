@@ -33,6 +33,7 @@ const CreateArticle = () => {
         day: 'numeric',
         year: 'numeric',
       }),
+      // date: new Date().toISOString(),
       author: user ? { id: user.uid, email: user.email } : null,
     };
 
