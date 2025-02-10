@@ -22,7 +22,9 @@ ArticleCard.propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.shape({
+      email: PropTypes.string.isRequired,
+    })
   }).isRequired,
 }
 

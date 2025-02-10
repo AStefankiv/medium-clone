@@ -6,26 +6,25 @@ import ArticleEditor from '../components/ArticleEditor';
 import { db } from '../firebase/firebase';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
-
+import CommentCard from '../components/CommentCard';
 import { useAuth } from '../context/AuthContext';
 
 const Article = () => {
   const { id } = useParams();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
   const navigate = useNavigate();
-
   const { user } = useAuth();
 
   useEffect(() => {
     const fetchArticle = async () => {
       const docRef = (doc(db, 'articles', id));
-      console.log('docRef:', docRef);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
         setArticleData({ id: docSnap.id, ...docSnap.data() });
-        console.log('Article data:', articleData);
       } else {
         console.log('No such document!');
       }
@@ -35,6 +34,37 @@ const Article = () => {
       fetchArticle();
     }
   }, [id, user]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      const docRef = doc(db, 'articles', id, 'comments');
+      const docSnap = await getDoc(docRef);
+      const commentsList = commentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setComments(commentsList);
+    };
+
+    fetchComments();
+  }, [id]);
+
+  const handleAddComment = async () => {
+    if (newComment.trim() === '') {
+      alert('Comment cannot be empty');
+      return;
+    }
+
+    try {
+      const docRef = doc(db, 'articles', id, 'comments');
+      await setDoc(docRef, {
+        text: newComment,
+        author: user ? { id: user.uid, email: user.email } : { email: 'Anonymous' },
+        date: new Date().toISOString(),
+      });
+      setNewComment('');
+      window.location.reload();
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    }
+  };
 
   const handleSave = async (updatedArticle) => {
     try {
@@ -71,33 +101,56 @@ const Article = () => {
   };
 
   return (
-    <div className="article">
-      {articleData ? (
-        <>
-        {!isEditing ? (
-          <div className='read-mode'>
-            <h1 className="article-title">{articleData.title}</h1>
-            <p className="article-description">{articleData.description}</p>
+    <div className="article-page">
+      <div className="article">
+        {articleData ? (
+          <>
+          {!isEditing ? (
+            <div className='read-mode'>
+              <h1 className="article-title">{articleData.title}</h1>
+              <p className="article-description">{articleData.description}</p>
 
-            <div
-                className="article-content"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(articleData.content),
-                }}
-              ></div>
-            <div className='edit-button'>
-            <button onClick={handleToggleEdit}>✏️ Edit</button>
+              <div
+                  className="article-content"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(articleData.content),
+                  }}
+                ></div>
+              <div className='edit-button'>
+              <button onClick={handleToggleEdit}>✏️ Edit</button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className='edit-mode'>
+              <ArticleEditor article={articleData} onSave={handleSave} onCancel={handleCancelEdit} onDelete={handleDelete} />
+              </div>
+          )}
+          </>
         ) : (
-          <div className='edit-mode'>
-            <ArticleEditor article={articleData} onSave={handleSave} onCancel={handleCancelEdit} onDelete={handleDelete} />
-            </div>
+          <p>Article not found</p>
         )}
-        </>
-      ) : (
-        <p>Article not found</p>
-      )}
+      </div>
+        <div className="comments">
+          <h2>Comments</h2>
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <CommentCard key={comment.id} comment={comment} />
+            ))
+          ) : (
+            <p>No comments yet</p>
+          )}
+
+          {user && (
+            <div className="add-comment">
+              <textarea
+                placeholder="Add a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              ></textarea>
+              <button onClick={handleAddComment}>Add Comment</button>
+            </div>
+          )}
+        </div>
     </div>
   );
 }
