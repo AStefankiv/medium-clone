@@ -57,7 +57,11 @@ const Article = () => {
       const newCommentData = {
         text: newComment,
         author: user ? { id: user.uid, email: user.email } : { email: 'Anonymous' },
-        date: new Date().toISOString(),
+        date: new Date().toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }),
       };
 
       const docRef = await addDoc(commentsRef, newCommentData);
