@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { doc, getDoc, getDocs, setDoc, addDoc, deleteDoc, collection } from 'firebase/firestore';
 import '../styles/Article.css';
 import ArticleEditor from '../components/ArticleEditor';
 import { db } from '../firebase/firebase';
@@ -37,9 +37,9 @@ const Article = () => {
 
   useEffect(() => {
     const fetchComments = async () => {
-      const docRef = doc(db, 'articles', id, 'comments');
-      const docSnap = await getDoc(docRef);
-      const commentsList = commentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const commentsRef = collection(db, 'articles', id, 'comments');
+      const commentSnap = await getDocs(commentsRef);
+      const commentsList = commentSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setComments(commentsList);
     };
 
@@ -53,12 +53,15 @@ const Article = () => {
     }
 
     try {
-      const docRef = doc(db, 'articles', id, 'comments');
-      await setDoc(docRef, {
+      const commentsRef = collection(db, 'articles', id, 'comments');
+      const newCommentData = {
         text: newComment,
         author: user ? { id: user.uid, email: user.email } : { email: 'Anonymous' },
         date: new Date().toISOString(),
-      });
+      };
+
+      const docRef = await addDoc(commentsRef, newCommentData);
+      setComments([...comments, { id: docRef.id, ...newCommentData }]);
       setNewComment('');
       window.location.reload();
     } catch (error) {
