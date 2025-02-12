@@ -1,6 +1,5 @@
 .article {
   width: 90%;
-  max-width: 800px;
   margin: 40px auto;
   padding: 25px;
   background: #ffffff;
@@ -58,7 +57,6 @@
   font-style: italic;
 }
 
-/* Improved Button Styling */
 button {
   display: inline-block;
   background: #0077cc;
@@ -89,10 +87,8 @@ button:active {
   margin-top: 20px;
 }
 
-/* Comment Section */
 .comments {
   width: 90%;
-  max-width: 800px;
   margin: 30px auto;
   padding: 20px;
   background: #fafafa;
@@ -130,7 +126,6 @@ button:active {
   outline: none;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .article, .comments {
     width: 95%;

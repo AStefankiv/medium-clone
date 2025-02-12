@@ -1,5 +1,5 @@
 import '../styles/Header.css';
-import LogoutButton from './LogoutButton';
+import { logOut } from "../firebase/auth";
 import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
             <p>{user.email}</p>
           </div>
           <div className="header__right">
-            <LogoutButton />
+            <button onClick={logOut}>🔓 Log out</button>
           </div>
         </div>
       )}
