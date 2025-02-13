@@ -15,6 +15,10 @@ const Article = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editingComment, setEditingComment] = useState('');
+
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -107,6 +111,38 @@ const Article = () => {
     }
   };
 
+  const handleEditComment = (comment) => {
+    if (user && user.uid === comment.author.id) {
+      setEditingCommentId(comment.id);
+      setEditingComment(comment.text);
+    } else {
+      alert('You are not authorized to edit this comment');
+    }
+  };
+
+  const handleSaveComment = async (commentId) => {
+    if (editingComment.trim() === '') {
+      alert('Comment cannot be empty');
+      return;
+    }
+
+    try {
+      const commentRef = doc(db, 'articles', id, 'comments', commentId);
+      await setDoc(commentRef, { text: editingComment }, { merge: true });
+
+      const updatedComments = comments.map((comment) =>
+        comment.id === commentId ? { ...comment, text: editingComment } : comment
+      );
+
+      setComments(updatedComments);
+      setEditingCommentId(null);
+      setEditingComment('');
+    }
+    catch (e) {
+      console.error('Error updating comment:', e);
+    }
+  };
+
   return (
     <div className="article-page">
       <div className="article">
@@ -141,7 +177,21 @@ const Article = () => {
           <h2>Comments</h2>
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
+              editingCommentId === comment.id ? (
+                <div key={comment.id} className="edit-comment">
+                  <textarea
+                    value={editingComment}
+                    onChange={(e) => setEditingComment(e.target.value)}
+                  ></textarea>
+                  <button onClick={() => handleSaveComment(comment.id)}>Save</button>
+                </div>
+              ) : (
+                <CommentCard
+                  key={comment.id}
+                  comment={comment}
+                  onEdit={() => handleEditComment(comment)}
+                />
+              )
             ))
           ) : (
             <p>No comments yet</p>
@@ -154,7 +204,7 @@ const Article = () => {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               ></textarea>
-              <button onClick={handleAddComment}>Add Comment</button>
+              <button onClick={handleAddComment}>➕ Add Comment</button>
             </div>
           )}
         </div>
