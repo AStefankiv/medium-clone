@@ -15,10 +15,8 @@ const Article = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingComment, setEditingComment] = useState('');
-
   const navigate = useNavigate();
   const { user } = useAuth();
 
