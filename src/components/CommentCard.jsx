@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import '../styles/CommentCard.css';
 
-const CommentCard = ({ comment, onEdit }) => {
+const CommentCard = ({ comment, onEdit, onDelete }) => {
   return (
     <div className="comment-card">
       <div className="comment-card__author">
@@ -12,7 +12,10 @@ const CommentCard = ({ comment, onEdit }) => {
         <p>{comment.text}</p>
       </div>
         {onEdit && (
-          <button className="edit-button" onClick={() => onEdit(comment)}>✏️ Edit</button>
+          <button className="edit-button" onClick={() => onEdit(comment)}>📝 Edit</button>
+        )}
+        {onDelete && (
+          <button className="delete-button" onClick={() => onDelete(comment)}>❌ Delete</button>
         )}
     </div>
   )
@@ -27,6 +30,7 @@ CommentCard.propTypes = {
     }),
   }).isRequired,
   onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 }
 
 export default CommentCard;

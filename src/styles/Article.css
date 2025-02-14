@@ -126,6 +126,12 @@ button:active {
   outline: none;
 }
 
+.save-delete-buttons {
+  display: flex; /* Aligns buttons in a row */
+  gap: 10px; /* Adds spacing between buttons */
+  margin-top: 8px; /* Adds space above buttons */
+}
+
 @media (max-width: 768px) {
   .article, .comments {
     width: 95%;

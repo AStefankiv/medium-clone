@@ -141,6 +141,17 @@ const Article = () => {
     }
   };
 
+  const handleDeleteComment = async (comment) => {
+    try {
+      const commentRef = doc(db, 'articles', id, 'comments', comment.id);
+      await deleteDoc(commentRef);
+      const updatedComments = comments.filter((c) => c.id !== comment.id);
+      setComments(updatedComments);
+    } catch (e) {
+      console.error('Error deleting comment:', e);
+    }
+  };
+
   return (
     <div className="article-page">
       <div className="article">
@@ -177,12 +188,19 @@ const Article = () => {
             comments.map((comment) => (
               editingCommentId === comment.id ? (
                 <div key={comment.id} className="edit-comment">
-                  <textarea
-                    value={editingComment}
-                    onChange={(e) => setEditingComment(e.target.value)}
-                  ></textarea>
-                  <button onClick={() => handleSaveComment(comment.id)}>Save</button>
-                </div>
+                  <div className="save-delete-buttons">
+                    <textarea
+                      value={editingComment}
+                      onChange={(e) => setEditingComment(e.target.value)}
+                    ></textarea>
+                    <button onClick={() => handleSaveComment(comment.id)}>Save</button>
+                  <button onClick={() => handleDeleteComment(comment)}>❌ Delete</button>
+                  </div>
+
+                {/* <div className="delete-button">
+                </div> */}
+              </div>
+
               ) : (
                 <CommentCard
                   key={comment.id}
