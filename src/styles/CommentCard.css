@@ -18,3 +18,29 @@
   display: flex;
   justify-content: space-between;
 }
+
+.button-group {
+  display: flex;
+  gap: 10px; /* Adds spacing between buttons */
+  justify-content: center; /* Aligns buttons to the left */
+  align-items: center; /* Centers vertically */
+  margin-top: 10px;
+}
+
+.edit-button-card, .delete-button-card {
+  width: 100px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button-card {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.delete-button-card {
+  background-color: #f44336; /* Red */
+  color: white;
+}

@@ -11,12 +11,14 @@ const CommentCard = ({ comment, onEdit, onDelete }) => {
       <div className="comment-card__content">
         <p>{comment.text}</p>
       </div>
+      <div className="button-group">
         {onEdit && (
-          <button className="edit-button" onClick={() => onEdit(comment)}>📝 Edit</button>
+          <button className="edit-button-card" onClick={() => onEdit(comment)}>📝 Edit</button>
         )}
         {onDelete && (
-          <button className="delete-button" onClick={() => onDelete(comment)}>❌ Delete</button>
+          <button className="delete-button-card" onClick={() => onDelete(comment)}>❌ Delete</button>
         )}
+        </div>
     </div>
   )
 }
