@@ -188,19 +188,17 @@ const Article = () => {
             comments.map((comment) => (
               editingCommentId === comment.id ? (
                 <div key={comment.id} className="edit-comment">
-                  <div className="save-delete-buttons">
+                  <div className="text-area">
                     <textarea
                       value={editingComment}
                       onChange={(e) => setEditingComment(e.target.value)}
                     ></textarea>
+                  </div>
+                  <div className="save-delete-buttons">
                     <button onClick={() => handleSaveComment(comment.id)}>Save</button>
                   <button onClick={() => handleDeleteComment(comment)}>❌ Delete</button>
                   </div>
-
-                {/* <div className="delete-button">
-                </div> */}
               </div>
-
               ) : (
                 <CommentCard
                   key={comment.id}

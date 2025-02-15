@@ -5,6 +5,7 @@
   margin: 8px 0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 15px; /* Ensures spacing */
 }
 
 .comment-text {
@@ -21,9 +22,10 @@
 
 .button-group {
   display: flex;
-  gap: 10px; /* Adds spacing between buttons */
-  justify-content: center; /* Aligns buttons to the left */
-  align-items: center; /* Centers vertically */
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Ensures alignment */
   margin-top: 10px;
 }
 
@@ -33,6 +35,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
 .edit-button-card {
@@ -40,7 +43,16 @@
   color: white;
 }
 
+.edit-button-card:hover {
+  background-color: #45a049; /* Slightly darker green */
+}
+
 .delete-button-card {
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
   color: white;
+  width: 100px;
+}
+
+.delete-button-card:hover {
+  background-color: #d32f2f; /* Slightly darker red */
 }
