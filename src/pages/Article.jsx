@@ -10,19 +10,22 @@ import CommentCard from '../components/CommentCard';
 import { useAuth } from '../context/AuthContext';
 
 const Article = () => {
+  //User & Article state:
   const { id } = useParams();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  //Comment state:
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingComment, setEditingComment] = useState('');
-  const navigate = useNavigate();
-  const { user } = useAuth();
 
+  //Article:
   useEffect(() => {
     const fetchArticle = async () => {
-      const docRef = (doc(db, 'articles', id));
+      const docRef = doc(db, 'articles', id);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -36,44 +39,6 @@ const Article = () => {
       fetchArticle();
     }
   }, [id, user]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      const commentsRef = collection(db, 'articles', id, 'comments');
-      const commentSnap = await getDocs(commentsRef);
-      const commentsList = commentSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setComments(commentsList);
-    };
-
-    fetchComments();
-  }, [id]);
-
-  const handleAddComment = async () => {
-    if (newComment.trim() === '') {
-      alert('Comment cannot be empty');
-      return;
-    }
-
-    try {
-      const commentsRef = collection(db, 'articles', id, 'comments');
-      const newCommentData = {
-        text: newComment,
-        author: user ? { id: user.uid, email: user.email } : { email: 'Anonymous' },
-        date: new Date().toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-        }),
-      };
-
-      const docRef = await addDoc(commentsRef, newCommentData);
-      setComments([...comments, { id: docRef.id, ...newCommentData }]);
-      setNewComment('');
-      window.location.reload();
-    } catch (error) {
-      console.error('Error adding comment:', error);
-    }
-  };
 
   const handleSave = async (updatedArticle) => {
     try {
@@ -106,6 +71,45 @@ const Article = () => {
       navigate('/');
     } catch (e) {
       console.error('Error deleting article:', e);
+    }
+  };
+
+  // Comments:
+  useEffect(() => {
+    const fetchComments = async () => {
+      const commentsRef = collection(db, 'articles', id, 'comments');
+      const commentSnap = await getDocs(commentsRef);
+      const commentsList = commentSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setComments(commentsList);
+    };
+
+    fetchComments();
+  }, [id]);
+  
+  const handleAddComment = async () => {
+    if (newComment.trim() === '') {
+      alert('Comment cannot be empty');
+      return;
+    }
+
+    try {
+      const commentsRef = collection(db, 'articles', id, 'comments');
+      const newCommentData = {
+        text: newComment,
+        author: user ? { id: user.uid, email: user.email } : { email: 'Anonymous' },
+        date: new Date().toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }),
+      };
+
+      const docRef = await addDoc(commentsRef, newCommentData);
+      setComments([...comments, { id: docRef.id, ...newCommentData }]);
+      setNewComment('');
+      window.location.reload();
+    } catch (error) {
+      console.error('Error adding comment:', error);
     }
   };
 

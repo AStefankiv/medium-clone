@@ -100,7 +100,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       {uploading && <p>Uploading image...</p>}
       {imageUrl && (
         <div className='uploaded-image'>
-        <img src={imageUrl} alt="Uploaded" width="500"/>
+        <img src={imageUrl} alt="Uploaded" width="600"/>
         </div>
       )}
     </div>
