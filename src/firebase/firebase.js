@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = {
@@ -8,6 +9,7 @@ const firebaseConfig = {
   authDomain: "medium-42770.firebaseapp.com",
   projectId: "medium-42770",
   storageBucket: "medium-42770.firebasestorage.app",
+  // storageBucket: "medium-42770.appspot.com",
   messagingSenderId: "537432516476",
   appId: "1:537432516476:web:5e04959137f2fff78326f9"
 };
@@ -15,5 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
-export { db, auth };
+export { db, auth, storage };

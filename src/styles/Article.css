@@ -151,7 +151,7 @@ button:active {
   font-size: 1rem;
   resize: none;
 }
-
+ 
 .save-delete-buttons {
   display: flex;
   gap: 12px;

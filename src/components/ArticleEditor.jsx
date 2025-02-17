@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
 import '../styles/ArticleEditor.css';
+import { storage } from '../firebase/firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [content, setContent] = useState(article ? article.content : '');
@@ -9,6 +11,32 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [description, setDescription] = useState(article ? article.description : '');
   const [date, setDate] = useState(article ? article.date : new Date().toLocaleDateString());
   const [author, setAuthor] = useState(article ? article.author : '');
+  const [imageUrl, setImageUrl] = useState(article ? article.imageUrl : '');
+  const [uploading, setUploading] = useState(false);
+
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    const storageRef = ref(storage, `article-images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      'state_changed',
+      null,
+      (error) => {
+        console.error('Image upload failed:', error);
+        setUploading(false);
+      },
+      async () => {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        setImageUrl(downloadURL);
+        setUploading(false);
+        alert('Image uploaded successfully!');
+      }
+    );
+  };
 
   const handleEditorChange = (newContent) => {
     setContent(newContent);
@@ -22,6 +50,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       content,
       date,
       author,
+      imageUrl,
     };
     await onSave(updatedArticle);
     alert('Article saved successfully!');
@@ -63,6 +92,13 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
         onChange={(e) => setDescription(e.target.value)}
         className='article-description'
       />
+      <input
+      type="file"
+      accept="image/*"
+      onChange={handleImageUpload}
+      />
+      {uploading && <p>Uploading image...</p>}
+      {imageUrl && <img src={imageUrl} alt="Uploaded" width="200" />}
     </div>
 
       <Editor
@@ -74,12 +110,15 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
           plugins: [
             'advlist autolink lists link image charmap print preview anchor',
             'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
+            'insertdatetime media table paste code help wordcount imagetools'
           ],
           toolbar:
             'undo redo | formatselect | bold italic backcolor | \
             alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | removeformat'
+            bullist numlist outdent indent | removeformat | image',
+            images_upload_handler: handleImageUpload,
+            automatic_uploads: true,
+            file_picker_types: 'image',
         }}
         onEditorChange={handleEditorChange}
       />
@@ -100,6 +139,7 @@ ArticleEditor.propTypes = {
     content: PropTypes.string,
     date: PropTypes.string,
     author: PropTypes.string,
+    imageUrl: PropTypes.string,
   }),
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

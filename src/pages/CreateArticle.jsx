@@ -28,6 +28,7 @@ const CreateArticle = () => {
       title: newArticle.title || 'Untitled',
       description: newArticle.description || 'No description',
       content: newArticle.content || '<p>No content</p>',
+      imageUrl: newArticle.imageUrl || '',
       date: new Date().toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',

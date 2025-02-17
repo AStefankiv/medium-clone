@@ -4,3 +4,21 @@
   align-items:center;
   gap: 4rem;
 }
+
+.article-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin: 10px 0;
+}
+
+.no-image {
+  font-size: 0.9rem;
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}

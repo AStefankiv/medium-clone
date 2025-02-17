@@ -161,7 +161,13 @@ const Article = () => {
             <div className='read-mode'>
               <h1 className="article-title">{articleData.title}</h1>
               <p className="article-description">{articleData.description}</p>
-
+              {articleData.imageUrl && (
+                <img
+                  src={articleData.imageUrl}
+                  alt={articleData.title || "Article image"}
+                  className="article-image"
+                />
+              )}
               <div
                   className="article-content"
                   dangerouslySetInnerHTML={{
