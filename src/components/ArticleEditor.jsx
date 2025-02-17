@@ -98,7 +98,11 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       onChange={handleImageUpload}
       />
       {uploading && <p>Uploading image...</p>}
-      {imageUrl && <img src={imageUrl} alt="Uploaded" width="200" />}
+      {imageUrl && (
+        <div className='uploaded-image'>
+        <img src={imageUrl} alt="Uploaded" width="500"/>
+        </div>
+      )}
     </div>
 
       <Editor

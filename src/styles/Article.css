@@ -166,6 +166,16 @@ button:active {
   border-radius: 6px;
 }
 
+.article-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin: 10px 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .article, .comments {
