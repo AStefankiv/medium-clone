@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import '../styles/CommentCard.css';
 
+import { useAuth } from '../context/AuthContext';
+
 const CommentCard = ({ comment, onEdit, onDelete }) => {
+  const { user } = useAuth();
   return (
     <div className="comment-card">
       <div className="comment-card__author">
@@ -12,12 +15,16 @@ const CommentCard = ({ comment, onEdit, onDelete }) => {
         <p>{comment.text}</p>
       </div>
       <div className="button-group">
+        {user && user.uid === comment.author.id && (
+          <>
         {onEdit && (
           <button className="edit-button-card" onClick={() => onEdit(comment)}>📝 Edit</button>
         )}
         {onDelete && (
           <button className="delete-button-card" onClick={() => onDelete(comment)}>❌ Delete</button>
         )}
+        </>
+      )}
         </div>
     </div>
   )

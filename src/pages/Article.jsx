@@ -179,7 +179,9 @@ const Article = () => {
                   }}
                 ></div>
               <div className='edit-button'>
-              <button onClick={handleToggleEdit}>✏️ Edit</button>
+              {user && user.uid === articleData.author.id && (
+                <button onClick={handleToggleEdit}>✏️ Edit</button>
+              )}
               </div>
             </div>
           ) : (
