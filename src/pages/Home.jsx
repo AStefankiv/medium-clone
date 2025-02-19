@@ -10,12 +10,19 @@ const Home = () => {
   const navigate = useNavigate();
 
   const fetchArticles = async () => {
-    const q = query(collection(db, 'articles'), orderBy('date', 'desc'));
-    const querySnapshot = await getDocs(q);
-    const articles = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const articleRef = query(collection(db, 'articles'), orderBy('date', 'desc'));
+    const querySnapshot = await getDocs(articleRef);
+
+    const articles = await Promise.all(querySnapshot.docs.map(async (doc) => {
+      const articleData = { id: doc.id, ...doc.data() };
+
+      const commentRef = query(collection(db, 'articles', doc.id, 'comments'), orderBy('date', 'desc'));
+      const commentSnapshot = await getDocs(commentRef);
+      articleData.comments = commentSnapshot.size;
+
+      return articleData;
+    }
+    ));
     return articles;
   }
 

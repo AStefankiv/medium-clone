@@ -9,7 +9,6 @@ const firebaseConfig = {
   authDomain: "medium-42770.firebaseapp.com",
   projectId: "medium-42770",
   storageBucket: "medium-42770.firebasestorage.app",
-  // storageBucket: "medium-42770.appspot.com",
   messagingSenderId: "537432516476",
   appId: "1:537432516476:web:5e04959137f2fff78326f9"
 };

@@ -14,8 +14,8 @@ const Article = () => {
   const { id } = useParams();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const navigate = useNavigate();
   const { user } = useAuth();
+  const navigate = useNavigate();
   //Comment state:
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');

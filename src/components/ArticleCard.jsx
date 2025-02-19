@@ -4,17 +4,23 @@ import '../styles/ArticleCard.css';
 
 const ArticleCard = ({ article }) => {
   return (
-    <div className="article-card">
-      <h2>{article.title}</h2>
-      <p>{article.description}</p>
-      {/* {article.imageUrl ? (<img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
-      ) : ( <p className="no-image">No image available</p>)} */}
-      <div className="article-card-footer">
-        <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
-        <p>📆 Published on: {article.date}</p>
-        <Link to={`/article/${article.id}`}>Read more</Link>
+    <Link to={`/article/${article.id}`}>
+      <div className="article-card">
+        <div className="title-description-footer">
+        <h2>{article.title}</h2>
+        <p>{article.description}</p>
+        <div className="article-card-footer">
+          <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
+          <p>💬 {article.comments || 0}</p>
+          <p>📆 Published on: {article.date}</p>
+        </div>
+        </div>
+        <div className="article-image">
+        {article.imageUrl ? (<img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
+        ) : ( <p className="no-image">No image available</p>)}
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -28,6 +34,7 @@ ArticleCard.propTypes = {
       email: PropTypes.string.isRequired,
     }),
     imageUrl: PropTypes.string,
+    comments: PropTypes.number.isRequired,
   }).isRequired,
 }
 
