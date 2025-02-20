@@ -21,6 +21,9 @@ const Article = () => {
   const [newComment, setNewComment] = useState('');
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingComment, setEditingComment] = useState('');
+  //Likes state:
+  const [likes, setLikes] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
 
   //Article:
   useEffect(() => {
@@ -156,6 +159,29 @@ const Article = () => {
     }
   };
 
+  //Likes:
+  useEffect(() => {
+    if (articleData) {
+      setLikes(articleData.likes || []);
+    }
+  }
+  , [articleData, user]);
+
+  const handleLike = async () => {
+    if (!user) {
+      alert('Please sign in to like this article');
+      return;
+    }
+
+    const articleRef = doc(db, 'articles', id);
+
+    if (likes.includes(user.uid)) {
+      await setDoc(articleRef, { likes: likes.filter((uid) => uid !== user.uid) }, { merge: true });
+    } else {
+      await setDoc(articleRef, { likes: [...likes, user.uid] }, { merge: true });
+    }
+  }
+
   return (
     <div className="article-page">
       <div className="article">
@@ -166,7 +192,7 @@ const Article = () => {
               <div className="read-mode-like">
                 <div className="article-title-container">
                   <h1 className="article-title">{articleData.title}</h1>
-                  <svg
+                  {/* <svg
                     className="heart-icon"
                     width="30"
                     height="30"
@@ -179,7 +205,12 @@ const Article = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path d="M12 21s-6-4.6-9-8c-2-2.4-3-5-3-7a6 6 0 0 1 6-6c2.2 0 4.2 1.2 5 3 0.8-1.8 2.8-3 5-3a6 6 0 0 1 6 6c0 2-1 4.6-3 7-3 3.4-9 8-9 8z"/>
-                  </svg>
+                  </svg> */}
+
+                  <button onClick={handleLike} className="like-button">
+                    {likes.includes(user?.uid) ? '❤️ Unlike' : '🤍 Like'}
+                  </button>
+
                 </div>
               </div>
               <h1 className="line"></h1>
