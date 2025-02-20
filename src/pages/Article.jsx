@@ -163,7 +163,26 @@ const Article = () => {
           <>
           {!isEditing ? (
             <div className='read-mode'>
-              <h1 className="article-title">{articleData.title}</h1>
+              <div className="read-mode-like">
+                <div className="article-title-container">
+                  <h1 className="article-title">{articleData.title}</h1>
+                  <svg
+                    className="heart-icon"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M12 21s-6-4.6-9-8c-2-2.4-3-5-3-7a6 6 0 0 1 6-6c2.2 0 4.2 1.2 5 3 0.8-1.8 2.8-3 5-3a6 6 0 0 1 6 6c0 2-1 4.6-3 7-3 3.4-9 8-9 8z"/>
+                  </svg>
+                </div>
+              </div>
+              <h1 className="line"></h1>
               <p className="article-description">{articleData.description}</p>
               {articleData.imageUrl && (
                 <img
