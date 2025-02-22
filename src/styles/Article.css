@@ -218,10 +218,11 @@ button:active {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .article-title {
-  flex: 0 0 90%; /* Take up 90% of the container */
+  flex: 0 0 97%; /* Take up 90% of the container */
   margin: 0;
 }
 
@@ -237,7 +238,7 @@ button:active {
 }
 
 .like-button {
-  flex: 0 0 10%;
+  flex: 0 0 3%;
   font-size: 1.5rem;
   font-weight: normal; 
   padding: 0;
@@ -248,5 +249,6 @@ button:active {
 }
 
 .like-button:hover {
+  background: none;
   transform: scale(1.2); /* Slight zoom effect on hover */
 }

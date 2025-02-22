@@ -23,7 +23,6 @@ const Article = () => {
   const [editingComment, setEditingComment] = useState('');
   //Likes state:
   const [likes, setLikes] = useState([]);
-  const [isLiked, setIsLiked] = useState(false);
 
   //Article:
   useEffect(() => {
@@ -176,9 +175,13 @@ const Article = () => {
     const articleRef = doc(db, 'articles', id);
 
     if (likes.includes(user.uid)) {
-      await setDoc(articleRef, { likes: likes.filter((uid) => uid !== user.uid) }, { merge: true });
+      const updatedLikes = likes.filter((like) => like !== user.uid);
+      setLikes(updatedLikes);
+      await setDoc(articleRef, { likes: updatedLikes }, { merge: true });
     } else {
-      await setDoc(articleRef, { likes: [...likes, user.uid] }, { merge: true });
+      const updatedLikes = [...likes, user.uid];
+      setLikes(updatedLikes);
+      await setDoc(articleRef, { likes: updatedLikes }, { merge: true });
     }
   }
 
