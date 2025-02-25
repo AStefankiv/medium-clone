@@ -23,6 +23,8 @@ const Article = () => {
   const [editingComment, setEditingComment] = useState('');
   //Likes state:
   const [likes, setLikes] = useState([]);
+  //Tags state:
+  const [selectedTags, setSelectedTags] = useState([]);
 
   //Article:
   useEffect(() => {
@@ -185,6 +187,13 @@ const Article = () => {
     }
   }
 
+  //Tags:
+  useEffect(() => {
+    if (articleData) {
+      setSelectedTags(articleData.tags || []);
+    }
+  }, [articleData]);
+
   return (
     <div className="article-page">
       <div className="article">
@@ -215,6 +224,16 @@ const Article = () => {
                     __html: DOMPurify.sanitize(articleData.content),
                   }}
                 ></div>
+              <div>
+                
+                <h2>📋 Tags: </h2>
+                <div className="tags">
+                  {articleData.tags.map((tag) => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                  </div>
+
+              </div>
               <div className='edit-button'>
               {user && user.uid === articleData.author.id && (
                 <button onClick={handleToggleEdit}>✏️ Edit</button>

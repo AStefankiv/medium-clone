@@ -1,0 +1,45 @@
+.tag-selector {
+  margin-bottom: 20px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.tag.selected {
+  background: #007bff;
+  color: white;
+}
+
+.custom-tag {
+  margin-top: 10px;
+}
+
+.custom-tag input {
+  padding: 8px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.selected-tags {
+  margin-top: 10px;
+}
+
+.selected-tag {
+  background: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
