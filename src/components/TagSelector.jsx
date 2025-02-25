@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/TagSelector.css';
 
-const availableTags = ['Software Development', 'JavaScript', 'Python', 'Coding', 'Data', 'AI', 'QA', 'UI', 'UX'];
+const availableTags = ['Software Dev', 'JavaScript', 'Python', 'Coding', 'Data', 'AI', 'QA', 'UI', 'UX'];
 
 const TagSelector = ({ selectedTags, setSelectedTags }) => {
   const [customTag, setCustomTag] = useState('');

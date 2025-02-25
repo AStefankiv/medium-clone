@@ -225,8 +225,7 @@ const Article = () => {
                   }}
                 ></div>
               <div>
-                
-                <h2>📋 Tags: </h2>
+
                 <div className="tags">
                   {articleData.tags.map((tag) => (
                     <span key={tag} className="tag">{tag}</span>

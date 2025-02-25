@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../styles/ArticleEditor.css';
 import { storage } from '../firebase/firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import TagSelector from './TagSelector';
 
 const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [content, setContent] = useState(article ? article.content : '');
@@ -12,6 +13,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [date, setDate] = useState(article ? article.date : new Date().toLocaleDateString());
   const [author, setAuthor] = useState(article ? article.author : '');
   const [imageUrl, setImageUrl] = useState(article ? article.imageUrl : '');
+  const [tags, setTags] = useState(article ? article.tags : []);
   const [uploading, setUploading] = useState(false);
 
   const handleImageUpload = async (event) => {
@@ -51,6 +53,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       date,
       author,
       imageUrl,
+      tags,
     };
     await onSave(updatedArticle);
     alert('Article saved successfully!');
@@ -72,6 +75,8 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       setDescription(article.description);
       setDate(article.date);
       setAuthor(article.author);
+      setImageUrl(article.imageUrl);
+      setTags(article.tags);
     }
   }, [article]);
 
@@ -93,10 +98,11 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
         className='article-description'
       />
       <input
-      type="file"
-      accept="image/*"
-      onChange={handleImageUpload}
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
       />
+      <TagSelector selectedTags={tags} setSelectedTags={setTags} />
       {uploading && <p>Uploading image...</p>}
       {imageUrl && (
         <div className='uploaded-image'>
@@ -144,6 +150,7 @@ ArticleEditor.propTypes = {
     date: PropTypes.string,
     author: PropTypes.string,
     imageUrl: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
   }),
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
