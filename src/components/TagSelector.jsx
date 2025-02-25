@@ -22,6 +22,10 @@ const TagSelector = ({ selectedTags, setSelectedTags }) => {
     }
   };
 
+  const removeTag = (tag) => {
+    setSelectedTags(selectedTags.filter(t => t !== tag));
+  };
+
   return (
     <div className="tag-selector">
       <h3>Select Tags</h3>
@@ -49,7 +53,10 @@ const TagSelector = ({ selectedTags, setSelectedTags }) => {
         <h4>Selected Tags:</h4>
         {selectedTags.length > 0 ? (
           selectedTags.map(tag => (
-            <span key={tag} className="selected-tag">{tag} ✖</span>
+            <span key={tag} className="selected-tag">
+              {tag}
+              <button className="remove-tag-btn" onClick={() => removeTag(tag)}>✖</button>
+            </span>
           ))
         ) : (
           <p>No tags selected</p>
@@ -58,6 +65,7 @@ const TagSelector = ({ selectedTags, setSelectedTags }) => {
     </div>
   );
 };
+
 
 TagSelector.propTypes = {
   selectedTags: PropTypes.arrayOf(PropTypes.string).isRequired,
