@@ -49,7 +49,7 @@ const TagSelector = ({ selectedTags, setSelectedTags }) => {
         />
         <button onClick={addCustomTag}>Add</button>
       </div>
-      <div className="selected-tags">
+      <div className="tag-list">
         <h4>Selected Tags:</h4>
         {selectedTags.length > 0 ? (
           selectedTags.map(tag => (
