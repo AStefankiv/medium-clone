@@ -252,3 +252,13 @@ button:active {
   background: none;
   transform: scale(1.2); /* Slight zoom effect on hover */
 }
+
+.tags {
+  gap: 86px;
+  padding: 4px 0;
+  align-items: center;
+}
+
+.tag {
+  margin-right: 0.5%;
+}
