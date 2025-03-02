@@ -12,8 +12,17 @@ const CreateArticle = () => {
   const navigate = useNavigate();
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const handleSave = async (newArticle) => {
+  const emptyArticle = {
+    title: '',
+    description: '',
+    content: '',
+    date: new Date().toLocaleDateString(),
+    author: '',
+    imageUrl: '',
+    tags: [],
+  };
 
+  const handleSave = async (newArticle) => {
     const slugify = (title) => {
       return title
       .toLowerCase()
@@ -54,11 +63,29 @@ const CreateArticle = () => {
     navigate('/');
   };
 
+  const handleDelete = async (article) => {
+    if (!article || !article.id) return;
+    if (window.confirm('Are you sure you want to delete this article?')) {
+      try {
+        await setDoc(doc(db, 'articles', article.id), { isDeleted: true }, { merge: true });
+        navigate('/');
+      } catch (error) {
+        console.error('Error deleting article:', error);
+        alert('Failed to delete the article. Please try again.');
+      }
+    }
+  };  
+
   return (
     <div className="create-article-page">
       <h1>Create a New Article</h1>
-      <ArticleEditor article={{ title: '', description: '', content: '' }} onSave={handleSave} onCancel={handleCancel} />
-      <TagSelector selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
+      <ArticleEditor
+      article={{ ...emptyArticle,
+        tags: selectedTags,
+      }}
+      onSave={handleSave}
+      onCancel={handleCancel}
+      onDelete={handleDelete} />
     </div>
   );
 };
