@@ -224,13 +224,15 @@ const Article = () => {
                     __html: DOMPurify.sanitize(articleData.content),
                   }}
                 ></div>
-
-              <div className="tags">
-                {articleData.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
-                ))}
+                <div className="tags">
+                  {articleData?.tags?.length > 0 ? (
+                    articleData.tags.map((tag) => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))
+                  ) : (
+                    <p>No tags available</p>
+                  )}
                 </div>
-
               <div className='edit-button'>
               {user && user.uid === articleData.author.id && (
                 <button onClick={handleToggleEdit}>✏️ Edit</button>

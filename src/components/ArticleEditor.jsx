@@ -111,8 +111,8 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
           </div>
         )}
       </div>
-        <TagSelector selectedTags={tags} setSelectedTags={setTags} />
       </div>
+        <TagSelector selectedTags={tags} setSelectedTags={setTags} />
       </div>
 
       <Editor
