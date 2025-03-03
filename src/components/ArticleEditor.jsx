@@ -97,19 +97,23 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
         onChange={(e) => setDescription(e.target.value)}
         className='article-description'
       />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-      />
-      <TagSelector selectedTags={tags} setSelectedTags={setTags} />
-      {uploading && <p>Uploading image...</p>}
-      {imageUrl && (
-        <div className='uploaded-image'>
-        <img src={imageUrl} alt="Uploaded" width="600"/>
-        </div>
-      )}
-    </div>
+      
+      <div className="image-and-tags">
+      <div className="file-upload-wrapper">
+        <label className="file-upload-label">
+          📷 Upload Image
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+        </label>
+        {uploading && <p>Uploading image...</p>}
+        {imageUrl && (
+          <div className="uploaded-image">
+            <img src={imageUrl} alt="Uploaded" width="600" />
+          </div>
+        )}
+      </div>
+        <TagSelector selectedTags={tags} setSelectedTags={setTags} />
+      </div>
+      </div>
 
       <Editor
         apiKey="ya17n7heyu718a0qj9q0uug85h1jiucgqc4yi15ln56o4itu"

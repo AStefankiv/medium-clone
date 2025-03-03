@@ -29,43 +29,50 @@ const TagSelector = ({ selectedTags, setSelectedTags }) => {
   return (
     <div className="tag-selector">
       <h3>Select Tags</h3>
-      <div className="tag-list">
+
+      {/* Available Tags */}
+      <div className="available-tags">
         {availableTags.map(tag => (
           <button
             key={tag}
-            className={selectedTags.includes(tag) ? 'tag selected' : 'tag'}
+            className={selectedTags.includes(tag) ? 'tag-button selected' : 'tag-button'}
             onClick={() => toggleTag(tag)}
           >
             {tag}
           </button>
         ))}
       </div>
-      <div className="custom-tag">
-        <input
-          type="text"
-          placeholder="Add custom tag..."
-          value={customTag}
-          onChange={(e) => setCustomTag(e.target.value)}
-        />
-        <button onClick={addCustomTag}>Add</button>
-      </div>
-      <div className="tag-list">
-        <h4>Selected Tags:</h4>
-        {selectedTags.length > 0 ? (
-          selectedTags.map(tag => (
-            <span key={tag} className="selected-tag">
-              {tag}
-              <button className="remove-tag-btn" onClick={() => removeTag(tag)}>✖</button>
-            </span>
-          ))
-        ) : (
-          <p>No tags selected</p>
-        )}
+
+      <div className="custom-selected-tags">
+      {/* Custom Tag Input */}
+        <div className="custom-tag">
+          <input
+            type="text"
+            placeholder="Add custom tag..."
+            value={customTag}
+            onChange={(e) => setCustomTag(e.target.value)}
+          />
+          <button onClick={addCustomTag}>Add</button>
+        </div>
+
+        {/* Selected Tags */}
+        <div className="selected-tags">
+          <h4>Selected Tags:</h4>
+          {selectedTags.length > 0 ? (
+            selectedTags.map(tag => (
+              <span key={tag} className="selected-tag">
+                {tag}
+                <button className="remove-tag-btn" onClick={() => removeTag(tag)}>✖</button>
+              </span>
+            ))
+          ) : (
+            <p className="no-tags">No tags selected</p>
+          )}
+        </div>
       </div>
     </div>
   );
 };
-
 
 TagSelector.propTypes = {
   selectedTags: PropTypes.arrayOf(PropTypes.string).isRequired,
