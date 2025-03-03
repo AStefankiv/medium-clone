@@ -1,16 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import ArticleEditor from '../components/ArticleEditor';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import '../styles/CreateArticle.css';
 import { useAuth } from '../context/AuthContext';
-import TagSelector from '../components/TagSelector';
 
 const CreateArticle = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [selectedTags, setSelectedTags] = useState([]);
 
   const emptyArticle = {
     title: '',
@@ -41,7 +38,6 @@ const CreateArticle = () => {
       description: newArticle.description || 'No description',
       content: newArticle.content || '<p>No content</p>',
       imageUrl: newArticle.imageUrl || '',
-      tags: selectedTags,
       date: new Date().toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
@@ -81,7 +77,6 @@ const CreateArticle = () => {
       <h1>Create a New Article</h1>
       <ArticleEditor
       article={{ ...emptyArticle,
-        tags: selectedTags,
       }}
       onSave={handleSave}
       onCancel={handleCancel}

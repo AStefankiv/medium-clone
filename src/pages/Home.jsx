@@ -4,10 +4,12 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const fetchArticles = async () => {
     const articleRef = query(collection(db, 'articles'), orderBy('date', 'desc'));
@@ -53,7 +55,9 @@ const Home = () => {
         {articles.length > 0 ? (
           <div className="articles-list">
             {articles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
+              (user && user.uid === article.author.id) || article.isPublic ? (
+                <ArticleCard key={article.id} article={article} />
+              ) : null
             ))}
           </div>
         ) : (

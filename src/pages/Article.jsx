@@ -33,7 +33,7 @@ const Article = () => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setArticleData({ id: docSnap.id, ...docSnap.data() });
+        setArticleData({ id: docSnap.id, ...docSnap.data(), tags: docSnap.data().tags || [] });
       } else {
         console.log('No such document!');
       }
@@ -224,7 +224,9 @@ const Article = () => {
                     __html: DOMPurify.sanitize(articleData.content),
                   }}
                 ></div>
+                {/*Tags*/}
                 <div className="tags">
+                  <h2>📑Tags:</h2>
                   {articleData?.tags?.length > 0 ? (
                     articleData.tags.map((tag) => (
                       <span key={tag} className="tag">{tag}</span>

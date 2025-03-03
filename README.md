@@ -61,4 +61,3 @@ To do:
 - Admin panel
 - User admin (edit all content)
 - Blog categories: private, public
-- Add tags: Software Development, JavaScript, Python, Coding, Data, AI, QA, UI, UX

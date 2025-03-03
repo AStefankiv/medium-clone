@@ -66,3 +66,32 @@
 .article-card-footer a:hover {
   background: #0056b3;
 }
+
+.article-card-tags {
+  display: flex;
+  align-items: center;  /* Align items vertically */
+  gap: 10px;  /* Add spacing between the tags */
+  flex-wrap: wrap;  /* Allow tags to wrap if necessary */
+  font-size: 14px;
+  color: #333;  /* Set the text color */
+}
+
+.article-card-tags strong {
+  font-weight: bold;
+}
+
+.article-card-tags .tag {
+  background-color: #e0e0e0;  /* Light gray background for each tag */
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+  text-transform: capitalize;  /* Capitalize first letter of each word */
+  white-space: nowrap;  /* Prevent tags from wrapping */
+}
+
+.article-card-tags .tag:hover {
+  background-color: #007bff;  /* Change background color on hover */
+  color: white;  /* Change text color on hover */
+  cursor: pointer;  /* Make the cursor a pointer to indicate it's clickable */
+}

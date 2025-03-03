@@ -66,7 +66,7 @@ const TagSelector = ({ selectedTags, setSelectedTags }) => {
               </span>
             ))
           ) : (
-            <p className="no-tags">No tags selected</p>
+            <p className="no-tags">🧐No tags selected</p>
           )}
         </div>
       </div>

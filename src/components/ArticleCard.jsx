@@ -11,6 +11,14 @@ const ArticleCard = ({ article }) => {
         <p>{article.description}</p>
         <div className="article-card-footer">
           <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
+          {article.tags && (
+            <div className="tags">
+              <h3>📑Tags:</h3>
+              {article.tags.map((tag) => (
+                <span key={tag} className="tag">{tag}</span>
+              ))}
+            </div>
+          )}
           <p>💬 {article.comments || 0}</p>
           <p>📆 Published on: {article.date}</p>
         </div>
@@ -34,6 +42,7 @@ ArticleCard.propTypes = {
       email: PropTypes.string.isRequired,
     }),
     imageUrl: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
     comments: PropTypes.number.isRequired,
   }).isRequired,
 }

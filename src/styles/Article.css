@@ -254,11 +254,21 @@ button:active {
 }
 
 .tags {
-  gap: 86px;
-  padding: 4px 0;
-  align-items: center;
+  display: flex;
+  align-items: center;  /* Align items vertically */
+  gap: 10px;  /* Add spacing between elements */
+  flex-wrap: wrap; /* Allow tags to wrap if needed */
+}
+
+.tags h2 {
+  font-size: 1.3rem;
+  margin: 0; /* Remove default margin */
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 .tag {
-  margin-right: 0.5%;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
 }

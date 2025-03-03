@@ -15,6 +15,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [imageUrl, setImageUrl] = useState(article ? article.imageUrl : '');
   const [tags, setTags] = useState(article ? article.tags : []);
   const [uploading, setUploading] = useState(false);
+  const [isPublic, setIsPublic] = useState(article ? article.isPublic : false);
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
@@ -54,6 +55,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       author,
       imageUrl,
       tags,
+      isPublic,
     };
     await onSave(updatedArticle);
     alert('Article saved successfully!');
@@ -77,6 +79,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
       setAuthor(article.author);
       setImageUrl(article.imageUrl);
       setTags(article.tags);
+      setIsPublic(article.isPublic);
     }
   }, [article]);
 
@@ -97,13 +100,28 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
         onChange={(e) => setDescription(e.target.value)}
         className='article-description'
       />
-      
+
       <div className="image-and-tags">
       <div className="file-upload-wrapper">
+        <div className="image-and-toggle">
+
+      {/*Public/Private toggle*/}
+      <div className="visibility-toggle">
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={isPublic}
+            onChange={() => setIsPublic(!isPublic)}
+          />
+          <span className="slider round"></span>
+        </label>
+      </div>
+
         <label className="file-upload-label">
           📷 Upload Image
           <input type="file" accept="image/*" onChange={handleImageUpload} />
         </label>
+        </div>
         {uploading && <p>Uploading image...</p>}
         {imageUrl && (
           <div className="uploaded-image">
@@ -152,9 +170,13 @@ ArticleEditor.propTypes = {
     description: PropTypes.string,
     content: PropTypes.string,
     date: PropTypes.string,
-    author: PropTypes.string,
+      author: PropTypes.shape({
+    id: PropTypes.string,
+    email: PropTypes.string
+  }),
     imageUrl: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
+    isPublic: PropTypes.bool,
   }),
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
