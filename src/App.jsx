@@ -7,6 +7,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Article from './pages/Article';
 import CreateArticle from './pages/CreateArticle';
+import AdminRoute from './components/AdminRoute';
+import AdminPage from './pages/AdminPage';
 import './App.css'
 
 function App() {
@@ -29,6 +31,14 @@ function App() {
                 <ProtectedRoute>
                   <CreateArticle />
                 </ProtectedRoute>
+              }
+              />
+              <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <AdminPage />
+                </AdminRoute>
               }
               />
               <Route path="/" element={<Home />} />
