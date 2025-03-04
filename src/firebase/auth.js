@@ -1,4 +1,5 @@
-import { auth } from './firebase';
+import { setDoc, doc } from 'firebase/firestore';
+import { auth, db } from './firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -6,13 +7,21 @@ import {
 } from 'firebase/auth';
 
 
-export const signUp = async (email, password) => {
+export const signUp = async (email, password, isAdmin = false) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log('User signed up:', userCredential.user);
+    const user = userCredential.user;
+    
+    await setDoc(doc(db, 'users', user.uid), {
+      email: user.email,
+      role: isAdmin ? 'admin' : 'user',
+    });
+    
+    console.log('User signed up:', user);
     return userCredential;
   } catch (error) {
     console.error('Error signing up:', error.message);
+    throw error;
   }
 };
 

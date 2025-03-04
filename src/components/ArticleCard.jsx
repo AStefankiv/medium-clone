@@ -12,7 +12,7 @@ const ArticleCard = ({ article }) => {
         <div className="article-card-footer">
           <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
           {article.tags && (
-            <div className="tags">
+            <div className="article-card-tags">
               <h3>📑Tags:</h3>
               {article.tags.map((tag) => (
                 <span key={tag} className="tag">{tag}</span>

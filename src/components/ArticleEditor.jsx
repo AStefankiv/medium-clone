@@ -15,7 +15,7 @@ const ArticleEditor = ({ article, onSave, onCancel, onDelete }) => {
   const [imageUrl, setImageUrl] = useState(article ? article.imageUrl : '');
   const [tags, setTags] = useState(article ? article.tags : []);
   const [uploading, setUploading] = useState(false);
-  const [isPublic, setIsPublic] = useState(article ? article.isPublic : false);
+  const [isPublic, setIsPublic] = useState(article ? article.isPublic : true);
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];

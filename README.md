@@ -60,4 +60,3 @@ A **full-stack web application** that replicates the functionality of **[Medium]
 To do:
 - Admin panel
 - User admin (edit all content)
-- Blog categories: private, public

@@ -16,6 +16,7 @@ const CreateArticle = () => {
     date: new Date().toLocaleDateString(),
     author: '',
     imageUrl: '',
+    isPublic: true,
     tags: [],
   };
 
@@ -43,6 +44,7 @@ const CreateArticle = () => {
         day: 'numeric',
         year: 'numeric',
       }),
+      isPublic: newArticle.isPublic || true,
       author: user ? { id: user.uid, email: user.email } : null,
     };
 
