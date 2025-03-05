@@ -11,16 +11,10 @@ export const toggleLike = async (articleId, userId) => {
     const articleData = articleSnap.data();
     const likesArray = articleData.likes || [];
 
-    if (likesArray.includes(userId)) {
-      // User already liked → remove like
-      await updateDoc(articleRef, {
-        likes: arrayRemove(userId),
-      });
-    } else {
-      // User hasn't liked yet → add like
-      await updateDoc(articleRef, {
-        likes: arrayUnion(userId),
-      });
-    }
+    const likes = likesArray.includes(userId) ? arrayRemove(userId) :  arrayUnion(userId);
+
+    await updateDoc(articleRef, {
+      likes,
+    });
   }
 };

@@ -17,10 +17,10 @@ export const signUp = async (email, password, isAdmin = false) => {
       role: isAdmin ? 'admin' : 'user',
     });
     
-    console.log('User signed up:', user);
+    console.log('User signed up:', user); //(if you want you can log your activity in Sentry cloud app)
     return userCredential;
   } catch (error) {
-    console.error('Error signing up:', error.message);
+    console.error('Error signing up:', error.message);// replace error notifications with toast (you can use toast module from UIKit or tostify library)
     throw error;
   }
 };

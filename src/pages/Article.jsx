@@ -39,7 +39,7 @@ const Article = () => {
       }
     };
 
-    if (user !== undefined) {
+    if (user) {
       fetchArticle();
     }
   }, [id, user]);
@@ -66,6 +66,8 @@ const Article = () => {
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
+
+  //create a variable with routes
 
   const handleDelete = async () => {
     try {
@@ -111,7 +113,7 @@ const Article = () => {
       const docRef = await addDoc(commentsRef, newCommentData);
       setComments([...comments, { id: docRef.id, ...newCommentData }]);
       setNewComment('');
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
       console.error('Error adding comment:', error);
     }
@@ -253,7 +255,7 @@ const Article = () => {
       </div>
         <div className="comments">
           <h2>Comments</h2>
-          {comments.length > 0 ? (
+          {comments.length !== 0 ? (
             comments.map((comment) => (
               editingCommentId === comment.id ? (
                 <div key={comment.id} className="edit-comment">
