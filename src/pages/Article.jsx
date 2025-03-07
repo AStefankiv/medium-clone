@@ -14,7 +14,7 @@ const Article = () => {
   const { id } = useParams();
   const [articleData, setArticleData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   const navigate = useNavigate();
   //Comment state:
   const [comments, setComments] = useState([]);
@@ -57,7 +57,7 @@ const Article = () => {
   };
 
   const handleToggleEdit = () => {
-    if (user && user.uid === articleData.author.id)
+    if (user && (user.uid === articleData.author.id || role === 'admin'))
       setIsEditing(true);
     else
       alert('You are not authorized to edit this article');
@@ -238,7 +238,7 @@ const Article = () => {
                   )}
                 </div>
               <div className='edit-button'>
-              {user && user.uid === articleData.author.id && (
+              {user && (user.uid === articleData.author.id || role === 'admin') && (
                 <button onClick={handleToggleEdit}>✏️ Edit</button>
               )}
               </div>
