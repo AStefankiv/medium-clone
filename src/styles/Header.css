@@ -26,6 +26,18 @@
 .header__left {
   display: flex;
   justify-content: flex-start;
+  gap: 15px;
+}
+
+.header__admin {
+  padding: 10px 10px 10px 10px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color:#2a00b3;
 }
 
 .header__right {

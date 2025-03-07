@@ -1,6 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { logOut } from '../firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import '../styles/AdminPage.css';
 
 const AdminPage = () => {
   const { user, role } = useAuth();
