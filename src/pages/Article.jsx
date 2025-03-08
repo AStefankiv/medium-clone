@@ -23,8 +23,6 @@ const Article = () => {
   const [editingComment, setEditingComment] = useState('');
   //Likes state:
   const [likes, setLikes] = useState([]);
-  //Tags state:
-  const [selectedTags, setSelectedTags] = useState([]);
 
   //Article:
   useEffect(() => {
@@ -187,15 +185,7 @@ const Article = () => {
       setLikes(updatedLikes);
       await setDoc(articleRef, { likes: updatedLikes }, { merge: true });
     }
-  }
-
-  //Tags:
-  useEffect(() => {
-    if (articleData) {
-      setSelectedTags(articleData.tags || []);
-    }
-  }, [articleData]);
-
+  };
   return (
     <div className="article-page">
       <div className="article">
