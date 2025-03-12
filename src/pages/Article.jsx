@@ -66,13 +66,14 @@ const Article = () => {
   };
 
   //create a variable with routes
+  const homeRoute = '/';
 
   const handleDelete = async () => {
     try {
       const docRef = doc(db, 'articles', id);
       await deleteDoc(docRef);
       console.log('Document deleted successfully!');
-      navigate('/');
+      navigate(homeRoute);
     } catch (e) {
       console.error('Error deleting article:', e);
     }

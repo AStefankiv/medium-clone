@@ -8,6 +8,7 @@ import { useAuth } from '../context/AuthContext';
 const CreateArticle = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const homeRoute = '/';
 
   const emptyArticle = {
     title: '',
@@ -49,7 +50,7 @@ const CreateArticle = () => {
     };
 
     await setDoc(docRef, updatedArticle);
-      navigate('/');
+      navigate(homeRoute);
 
     } catch (error) {
       console.error('Error adding article:', error.message);
@@ -58,7 +59,7 @@ const CreateArticle = () => {
   };
 
   const handleCancel = () => {
-    navigate('/');
+    navigate(homeRoute);
   };
 
   const handleDelete = async (article) => {
@@ -66,7 +67,7 @@ const CreateArticle = () => {
     if (window.confirm('Are you sure you want to delete this article?')) {
       try {
         await setDoc(doc(db, 'articles', article.id), { isDeleted: true }, { merge: true });
-        navigate('/');
+        navigate(homeRoute);
       } catch (error) {
         console.error('Error deleting article:', error);
         alert('Failed to delete the article. Please try again.');
