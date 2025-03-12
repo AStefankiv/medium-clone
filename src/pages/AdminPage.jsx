@@ -6,10 +6,11 @@ import '../styles/AdminPage.css';
 const AdminPage = () => {
   const { user, role } = useAuth();
   const navigate = useNavigate();
+  const homePath = '/';
 
   const handleLogout = async () => {
     await logOut();
-    navigate('/'); // Redirect to home after logout
+    navigate(homePath); // Redirect to home after logout
   };
 
   if (role !== 'admin') {
