@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home';
-import ProtectedRoute from './components/ProtectedRoute';
-import Dashboard from './components/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Dashboard from './components/Dashboard/Dashboard';
 import Login from './pages/Login';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Article from './pages/Article';
 import CreateArticle from './pages/CreateArticle';
-import AdminRoute from './components/AdminRoute';
+import AdminRoute from './components/AdminRoute/AdminRoute';
 import AdminPage from './pages/AdminPage';
 import './App.css'
 

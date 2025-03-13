@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import '../styles/CommentCard.css';
+import './CommentCard.css';
 
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 const CommentCard = ({ comment, onEdit, onDelete }) => {
   const { user } = useAuth();

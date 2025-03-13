@@ -1,6 +1,6 @@
-import '../styles/Header.css';
-import { logOut } from "../firebase/auth";
-import { useAuth } from '../context/AuthContext';
+import './Header.css';
+import { logOut } from "../../firebase/auth";
+import { useAuth } from '../../context/AuthContext';
 
 const Header = () => {
   const { user, role } = useAuth();

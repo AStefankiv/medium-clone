@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { signUp } from '../firebase/auth';
+import { signIn } from '../../firebase/auth';
 
-const SignUp = () => {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    await signUp(email, password);
+    await signIn(email, password);
   };
 
   return (
-    <form onSubmit={handleSignUp}>
-      <h2>Sign Up</h2>
+    <form onSubmit={handleSignIn}>
+      <h2>Sign In</h2>
       <input
         type="email"
         placeholder="Email"
@@ -27,9 +27,9 @@ const SignUp = () => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">Sign up</button>
+      <button type="submit">Sign In</button>
     </form>
   );
-};
+}
 
-export default SignUp;
+export default SignIn;

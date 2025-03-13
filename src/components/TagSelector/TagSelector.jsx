@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import '../styles/TagSelector.css';
+import './TagSelector.css';
 
 const availableTags = ['Software Dev', 'JavaScript', 'Python', 'Coding', 'Data', 'AI', 'QA', 'UI', 'UX'];
 
