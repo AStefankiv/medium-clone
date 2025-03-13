@@ -5,6 +5,7 @@ import { db } from '../firebase/firebase';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Button } from 'antd';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -47,7 +48,7 @@ const Home = () => {
         <p>Explore articles, stories, and ideas from the community.</p>
 
         <div className="home-header__create-article">
-          <button onClick={handleCreateArticle}>📝 Create Article</button>
+          <Button type="primary" onClick={handleCreateArticle}>📝 Create Article</Button>
         </div>
       </header>
 
