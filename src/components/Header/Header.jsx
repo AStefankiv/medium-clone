@@ -1,6 +1,7 @@
-import './Header.css';
+import './Header.scss';
 import { logOut } from "../../firebase/auth";
 import { useAuth } from '../../context/AuthContext';
+import { Button } from 'antd';
 
 const Header = () => {
   const { user, role } = useAuth();
@@ -10,7 +11,14 @@ const Header = () => {
       <div className="header__left">
         <a href="/" className="header__button">🏠 Home</a>
         {role === 'admin' && (
-          <a href="/admin" className="header__admin">🛠️</a>
+          // <a href="/admin" className="header__admin">🛠️</a>
+          <Button
+          type="primary"
+          shape="circle"
+          size="large"
+          href="/admin"
+          className='header__admin'
+          >🛠️</Button>
         )}
       </div>
       {!user ? (

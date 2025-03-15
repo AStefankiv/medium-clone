@@ -1,0 +1,81 @@
+// Define color variables
+$primary-color: #007bff;
+$primary-hover: #0056b3;
+$admin-button-color: #2a00b3;
+$button-text-color: #fff;
+$button-radius: 5px;
+$font-family: Arial, sans-serif;
+$font-color-user: #010d94;
+$background-color: #f5f5f5;
+$border-color: #ddd;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: $background-color;
+  border-bottom: 2px solid $border-color;
+  font-family: $font-family;
+
+  &__left {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  // General button styles
+  .header__button,
+  .header__admin {
+    padding: 10px 20px 10px 10px;
+    font-size: 16px;
+    color: $button-text-color;
+    border: none;
+    border-radius: $button-radius;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  // Styles for "Home" and "Login" buttons
+  &__button {
+    background-color: $primary-color;
+    
+    &:hover {
+      background-color: $primary-hover;
+    }
+  }
+
+  // Admin button (🛠️)
+  &__admin {
+    background-color: $admin-button-color;
+    
+    &:hover {
+      background-color: darken($admin-button-color, 10%);
+    }
+  }
+
+  // User info styles
+  .user-info {
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: underline;
+
+    p {
+      color: $font-color-user;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
