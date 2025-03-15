@@ -1,0 +1,43 @@
+.admin-container {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 50px auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn {
+  background-color: #ff4d4f !important; 
+  border-color: #ff4d4f !important;
+  padding: 20px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 130px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken(#ff4d4f, 10%) !important;
+    border-color: darken(#ff4d4f, 10%) !important;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: darken(#ff4d4f, 15%) !important;
+    border-color: darken(#ff4d4f, 15%) !important;
+    transform: scale(0.98);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 77, 79, 0.6);
+  }
+}
+
+.logout-btn:hover {
+  background: #c9302c;
+}

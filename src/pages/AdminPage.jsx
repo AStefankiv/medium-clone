@@ -1,7 +1,8 @@
 import { useAuth } from '../context/AuthContext';
 import { logOut } from '../firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import '../styles/AdminPage.css';
+import '../styles/AdminPage.scss';
+import { Button } from 'antd';
 
 const AdminPage = () => {
   const { user, role } = useAuth();
@@ -22,8 +23,12 @@ const AdminPage = () => {
       <h2>Admin Dashboard</h2>
       <p>Welcome, <strong>{user?.email}</strong> 👋</p>{/* replace with svg */}
       <p>You have admin privileges.</p>
-
-      <button onClick={handleLogout} className="logout-btn">🔓 Log Out</button>
+      <Button
+      onClick={handleLogout}
+      type="primary"
+      className="logout-btn">
+      🔓 Log Out
+      </Button>
     </div>
   );
 };
