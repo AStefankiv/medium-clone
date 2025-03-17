@@ -2,6 +2,9 @@ import './Header.scss';
 import { logOut } from "../../firebase/auth";
 import { useAuth } from '../../context/AuthContext';
 import { Button } from 'antd';
+import { HomeFilled } from '@ant-design/icons';
+import { ToolFilled } from '@ant-design/icons';
+import { UnlockFilled } from '@ant-design/icons';
 
 const Header = () => {
   const { user, role } = useAuth();
@@ -9,16 +12,26 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__left">
-        <a href="/" className="header__button">🏠 Home</a>
+        <a href="/" className="header__button">
+        <HomeFilled
+        style={{
+          fontSize: '20px',
+          color: '#bae0ff',
+          }}/> Home</a>
         {role === 'admin' && (
           // <a href="/admin" className="header__admin">🛠️</a>
           <Button
-          type="primary"
+          type="purple"
           shape="circle"
           size="large"
           href="/admin"
           className='header__admin'
-          >🛠️</Button>
+          ><ToolFilled
+          style={{
+            fontSize: '20px',
+            color: '#bae0ff',
+          }}
+          /></Button>
         )}
       </div>
       {!user ? (
@@ -31,7 +44,12 @@ const Header = () => {
             <p>{user.email}</p>
           </div>
           <div className="header__right">
-            <button onClick={logOut}>🔓 Log out</button>
+            <button onClick={logOut}>
+              <UnlockFilled
+                style={{
+                  fontSize: '20px',
+                  color: '#ffc53d',
+                  }}/> Log out</button>
           </div>
         </div>
       )}

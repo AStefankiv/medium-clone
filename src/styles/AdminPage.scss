@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .admin-container {
   text-align: center;
   padding: 20px;
@@ -21,14 +23,14 @@
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: darken(#ff4d4f, 10%) !important;
-    border-color: darken(#ff4d4f, 10%) !important;
+    background-color: color.adjust(#ff4d4f, $lightness: -5%) !important;
+    border-color: color.adjust(#ff4d4f, $lightness: -10%) !important;
     transform: scale(1.05);
   }
 
   &:active {
-    background-color: darken(#ff4d4f, 15%) !important;
-    border-color: darken(#ff4d4f, 15%) !important;
+    background-color: color.adjust(#ff4d4f, $lightness: -10%) !important;
+    border-color: color.adjust(#ff4d4f, $lightness: -15%) !important;
     transform: scale(0.98);
   }
 

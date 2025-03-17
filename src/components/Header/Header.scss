@@ -1,4 +1,7 @@
 // Define color variables
+@use "sass:color";
+$color: #9254de;
+
 $primary-color: #007bff;
 $primary-hover: #0056b3;
 $admin-button-color: #2a00b3;
@@ -61,7 +64,7 @@ $border-color: #ddd;
     background-color: $admin-button-color;
     
     &:hover {
-      background-color: darken($admin-button-color, 10%);
+      background-color: $color;
     }
   }
 

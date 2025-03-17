@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button } from 'antd';
+import { EditFilled } from '@ant-design/icons';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -46,9 +47,18 @@ const Home = () => {
       <header className="home-header">
         <h1>Welcome to Medium Clone</h1>
         <p>Explore articles, stories, and ideas from the community.</p>
-
         <div className="home-header__create-article">
-          <Button type="primary" onClick={handleCreateArticle}>📝 Create Article</Button>
+          <Button
+          type="primary"
+          onClick={handleCreateArticle}
+          >
+            <EditFilled
+            style={{
+              fontSize: '20px',
+              color: '#b5f5ec',
+              }}
+            />Create Article
+            </Button>
         </div>
       </header>
 
