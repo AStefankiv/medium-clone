@@ -13,6 +13,7 @@ import { HeartOutlined } from '@ant-design/icons';
 import { HeartFilled } from '@ant-design/icons';
 import { Button } from 'antd';
 import { EditFilled } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 const Article = () => {
   //User & Article state:
@@ -300,7 +301,7 @@ const Article = () => {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               ></textarea>
-              <button onClick={handleAddComment}>➕ Add Comment</button>
+              <button onClick={handleAddComment}><PlusCircleOutlined />Add Comment</button>
             </div>
           )}
         </div>
