@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './ArticleCard.css';
+import { TagFilled } from '@ant-design/icons';
 
 const ArticleCard = ({ article }) => {
   return (
@@ -13,7 +14,7 @@ const ArticleCard = ({ article }) => {
           <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
           {article.tags && (
             <div className="article-card-tags">
-              <h3>📑Tags:</h3>
+              <h3><TagFilled style={{fontSize: '20px', color: '#389e0d'}}/>Tags:</h3>
               {article.tags.map((tag) => (
                 <span key={tag} className="tag">{tag}</span>
               ))}

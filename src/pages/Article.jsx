@@ -8,6 +8,9 @@ import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
 import CommentCard from '../components/CommentCard/CommentCard';
 import { useAuth } from '../context/AuthContext';
+import { TagFilled } from '@ant-design/icons';
+import { HeartOutlined } from '@ant-design/icons';
+import { HeartFilled } from '@ant-design/icons';
 
 const Article = () => {
   //User & Article state:
@@ -198,7 +201,11 @@ const Article = () => {
               <div className="article-title-container">
                 <h1 className="article-title">{articleData.title}</h1>
                 <button onClick={handleLike} className="like-button">
-                  {likes.includes(user?.uid) ? '❤️' : '🤍'}
+                  {likes.includes(user?.uid) ?
+                  (<HeartFilled style={{ color: '#f44336', fontSize: '24px' }} />)
+                  :
+                  (<HeartOutlined style={{ color: '#f44336', fontSize: '24px' }} />)
+                  }
                 </button>
               </div>
               </div>
@@ -219,7 +226,7 @@ const Article = () => {
                 ></div>
                 {/*Tags*/}
                 <div className="tags">
-                  <h2>📑Tags:</h2>
+                  <h2><TagFilled style={{fontSize: '20px', color: '#389e0d'}}/>Tags:</h2>
                   {articleData?.tags?.length > 0 ? (
                     articleData.tags.map((tag) => (
                       <span key={tag} className="tag">{tag}</span>

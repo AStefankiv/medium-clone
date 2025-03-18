@@ -3,6 +3,7 @@ import { logOut } from '../firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminPage.scss';
 import { Button } from 'antd';
+import { LockFilled } from '@ant-design/icons';
 
 const AdminPage = () => {
   const { user, role } = useAuth();
@@ -27,7 +28,11 @@ const AdminPage = () => {
       onClick={handleLogout}
       type="primary"
       className="logout-btn">
-      🔓 Log Out
+      <LockFilled
+                style={{
+                  fontSize: '20px',
+                  color: '#ffc53d',
+                  }}/> Log Out
       </Button>
     </div>
   );
