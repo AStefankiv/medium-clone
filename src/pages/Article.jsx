@@ -88,7 +88,7 @@ const Article = () => {
   // Comments:
   useEffect(() => {
     const fetchComments = async () => {
-      const commentsRef = collection(db, 'articles', id, 'comments');
+      const commentsRef = collection(doc(db, 'articles', id), 'comments');
       const commentSnap = await getDocs(commentsRef);
       const commentsList = commentSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setComments(commentsList);
@@ -118,7 +118,6 @@ const Article = () => {
       const docRef = await addDoc(commentsRef, newCommentData);
       setComments([...comments, { id: docRef.id, ...newCommentData }]);
       setNewComment('');
-      //window.location.reload();
     } catch (error) {
       console.error('Error adding comment:', error);
     }
@@ -157,11 +156,12 @@ const Article = () => {
   };
 
   const handleDeleteComment = async (comment) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this comment?');
+    if (!confirmDelete) return;
     try {
       const commentRef = doc(db, 'articles', id, 'comments', comment.id);
       await deleteDoc(commentRef);
-      const updatedComments = comments.filter((c) => c.id !== comment.id);
-      setComments(updatedComments);
+      setComments(comments.filter((c) => c.id !== comment.id));
     } catch (e) {
       console.error('Error deleting comment:', e);
     }

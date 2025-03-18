@@ -29,10 +29,10 @@ const AdminPage = () => {
       type="primary"
       className="logout-btn">
       <LockFilled
-                style={{
-                  fontSize: '20px',
-                  color: '#ffc53d',
-                  }}/> Log Out
+        style={{
+          fontSize: '20px',
+          color: '#ffc53d',
+          }}/>Log Out
       </Button>
     </div>
   );
