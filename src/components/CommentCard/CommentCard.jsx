@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './CommentCard.css';
+import { HighlightFilled } from '@ant-design/icons';
 
 import { useAuth } from '../../context/AuthContext';
 
@@ -18,7 +19,7 @@ const CommentCard = ({ comment, onEdit, onDelete }) => {
         {user && user.uid === comment.author.id && (
           <>
         {onEdit && (
-          <button className="edit-button-card" onClick={() => onEdit(comment)}>📝 Edit</button>
+          <button className="edit-button-card" onClick={() => onEdit(comment)}><HighlightFilled />Edit</button>
         )}
         {onDelete && (
           <button className="delete-button-card" onClick={() => onDelete(comment)}>❌ Delete</button>
@@ -36,6 +37,7 @@ CommentCard.propTypes = {
     date: PropTypes.string.isRequired,
     author: PropTypes.shape({
       email: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
     }),
   }).isRequired,
   onEdit: PropTypes.func,

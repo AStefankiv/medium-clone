@@ -11,6 +11,8 @@ import { useAuth } from '../context/AuthContext';
 import { TagFilled } from '@ant-design/icons';
 import { HeartOutlined } from '@ant-design/icons';
 import { HeartFilled } from '@ant-design/icons';
+import { Button } from 'antd';
+import { EditFilled } from '@ant-design/icons';
 
 const Article = () => {
   //User & Article state:
@@ -237,7 +239,18 @@ const Article = () => {
                 </div>
               <div className='edit-button'>
               {user && (user.uid === articleData.author.id || role === 'admin') && (
-                <button onClick={handleToggleEdit}>✏️ Edit</button>
+                <Button
+                type="primary"
+                onClick={handleToggleEdit}
+                style={{height: '50px'}}
+                >
+                <EditFilled
+                style={{
+                fontSize: '20px',
+                color: '#b5f5ec',
+                }}
+                />Edit
+                </Button>
               )}
               </div>
             </div>
