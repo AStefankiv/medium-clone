@@ -1,11 +1,18 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './ArticleCard.css';
+import './ArticleCard.scss';
 import { TagFilled } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const ArticleCard = ({ article }) => {
+  const navigate = useNavigate();
+
+  const handleTagClick = (tag) => {
+    navigate(`/tag/${tag}`);
+  }
+
   return (
-    <Link to={`/article/${article.id}`}>
+    // <Link to={`/article/${article.id}`}>
       <div className="article-card">
         <div className="title-description-footer">
         <h2>{article.title}</h2>
@@ -16,7 +23,12 @@ const ArticleCard = ({ article }) => {
             <div className="article-card-tags">
               <h3><TagFilled style={{fontSize: '20px', color: '#389e0d'}}/>Tags:</h3>
               {article.tags.map((tag) => (
-                <span key={tag} className="tag">{tag}</span>
+                <span
+                key={tag}
+                className="tag"
+                onClick={() => handleTagClick(tag)}
+                >
+                {tag}</span>
               ))}
             </div>
           )}
@@ -25,11 +37,14 @@ const ArticleCard = ({ article }) => {
         </div>
         </div>
         <div className="article-image">
-        {article.imageUrl ? (<img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
-        ) : ( <p className="no-image">No image available</p>)}
+        {article.imageUrl ? (
+          <img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
+        ) : (
+        <p className="no-image">No image available</p>
+        )}
         </div>
       </div>
-    </Link>
+    // </Link>
   )
 }
 
