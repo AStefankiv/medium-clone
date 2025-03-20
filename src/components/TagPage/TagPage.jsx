@@ -8,12 +8,15 @@ const TagPage = () => {
   const { tagName } = useParams();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
+    console.log('tagName:', tagName);
     const fetchArticlesByTag = async () => {
       const q = query(
         collection(db, 'articles'),
-        where('tags', 'array-contains', tagName)
+        console.log('articles:', collection(db, 'articles')),
+        where('tags', 'array-contains', tagName),
+        // console.log('tagName:', tagName)
       );
       const querySnapshot = await getDocs(q);
       const articlesList = querySnapshot.docs.map(doc => ({

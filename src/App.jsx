@@ -10,7 +10,6 @@ import CreateArticle from './pages/CreateArticle';
 import AdminRoute from './components/AdminRoute/AdminRoute';
 import AdminPage from './pages/AdminPage';
 import ArticleList from './components/ArticleList/ArticleList';
-import ArticleCard from './components/ArticleCard/ArticleCard';
 import TagPage from'./components/TagPage/TagPage';
 import './App.css'
 
@@ -47,7 +46,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/article/:id" element={<Article />} />
-              <Route path="/tag/:tag" element={<TagPage />} />
+              <Route path="/tag/:tagName" element={<TagPage />} />
               <Route path="/articles" element={<ArticleList />} />
             </Routes>
           </main>
