@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import ArticleCard from '../ArticleCard/ArticleCard';
 import { db } from '../../firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import { useAuth } from '../../context/AuthContext';
 
 const TagPage = () => {
   const { tagName } = useParams();
+  const { user } = useAuth();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   
@@ -37,12 +39,14 @@ const TagPage = () => {
         <p>Loading...</p>
       ) : (
         <div>
-          {articles.length === 0 ? (
-            <p>No articles found with the tag {tagName}.</p>
-          ) : (
+          {articles.length > 0 ? (
             articles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
+              (user && user.uid === article.author.id) || user?.role === 'admin' || article.isPublic ? (
+                <ArticleCard key={article.id} article={article} />
+              ) : null
             ))
+          ) : (
+            <p>No articles found with the tag: {tagName}</p>
           )}
         </div>
       )}

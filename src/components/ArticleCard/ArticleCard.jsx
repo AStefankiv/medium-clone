@@ -12,8 +12,7 @@ const ArticleCard = ({ article }) => {
   }
 
   return (
-    // <Link to={`/article/${article.id}`}>
-      <div className="article-card">
+    <div className="article-card">
         <div className="title-description-footer">
         <h2>{article.title}</h2>
         <p>{article.description}</p>
@@ -36,15 +35,16 @@ const ArticleCard = ({ article }) => {
           <p>📆 Published on: {article.date}</p>
         </div>
         </div>
+        <Link to={`/article/${article.id}`}>
         <div className="article-image">
         {article.imageUrl ? (
           <img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
         ) : (
         <p className="no-image">No image available</p>
-        )}
+      )}
         </div>
+      </Link>
       </div>
-    // </Link>
   )
 }
 
