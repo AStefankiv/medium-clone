@@ -7,44 +7,47 @@ import { useNavigate } from 'react-router-dom';
 const ArticleCard = ({ article }) => {
   const navigate = useNavigate();
 
-  const handleTagClick = (tag) => {
+  const handleTagClick = (e, tag) => {
+    e.preventDefault(); // Prevent the parent Link from being triggered
+    e.stopPropagation(); // Stop event propagation
     navigate(`/tag/${tag}`);
   }
 
   return (
-    <div className="article-card">
+    <Link to={`/article/${article.id}`} className="article-card-link">
+      <div className="article-card">
         <div className="title-description-footer">
-        <h2>{article.title}</h2>
-        <p>{article.description}</p>
-        <div className="article-card-footer">
-          <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
-          {article.tags && (
-            <div className="article-card-tags">
-              <h3><TagFilled style={{fontSize: '20px', color: '#389e0d'}}/>Tags:</h3>
-              {article.tags.map((tag) => (
-                <span
-                key={tag}
-                className="tag"
-                onClick={() => handleTagClick(tag)}
-                >
-                {tag}</span>
-              ))}
-            </div>
-          )}
-          <p>💬 {article.comments || 0}</p>
-          <p>📆 Published on: {article.date}</p>
+          <h2>{article.title}</h2>
+          <p>{article.description}</p>
+          <div className="article-card-footer">
+            <p>👤 <strong>Author:</strong> {article.author ? article.author.email : "Unknown"}</p>
+            {article.tags && (
+              <div className="article-card-tags">
+                <h3><TagFilled style={{fontSize: '20px', color: '#389e0d'}}/>Tags:</h3>
+                {article.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="tag"
+                    onClick={(e) => handleTagClick(e, tag)}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+            <p>💬 {article.comments || 0}</p>
+            <p>📆 Published on: {article.date}</p>
+          </div>
         </div>
-        </div>
-        <Link to={`/article/${article.id}`}>
         <div className="article-image">
-        {article.imageUrl ? (
-          <img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
-        ) : (
-        <p className="no-image">No image available</p>
-      )}
+          {article.imageUrl ? (
+            <img src={article.imageUrl} alt={article.title || "Article image"} className="article-image" />
+          ) : (
+            <p className="no-image">No image available</p>
+          )}
         </div>
-      </Link>
       </div>
+    </Link>
   )
 }
 
