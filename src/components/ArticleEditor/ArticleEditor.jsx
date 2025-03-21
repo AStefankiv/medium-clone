@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import PropTypes from 'prop-types';
-import './ArticleEditor.css';
+import './ArticleEditor.scss';
 import { storage } from '../../firebase/firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import TagSelector from '../TagSelector/TagSelector';

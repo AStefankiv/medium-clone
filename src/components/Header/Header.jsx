@@ -19,7 +19,6 @@ const Header = () => {
           color: '#bae0ff',
           }}/> Home</a>
         {role === 'admin' && (
-          // <a href="/admin" className="header__admin">🛠️</a>
           <Button
           type="purple"
           shape="circle"

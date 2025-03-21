@@ -1,4 +1,4 @@
-import '../styles/Home.css';
+import '../styles/Home.scss';
 import ArticleCard from '../components/ArticleCard/ArticleCard';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase/firebase';

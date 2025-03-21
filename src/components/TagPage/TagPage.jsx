@@ -4,6 +4,7 @@ import ArticleCard from '../ArticleCard/ArticleCard';
 import { db } from '../../firebase/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useAuth } from '../../context/AuthContext';
+import './TagPage.scss';
 
 const TagPage = () => {
   const { tagName } = useParams();
@@ -12,13 +13,10 @@ const TagPage = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    console.log('tagName:', tagName);
     const fetchArticlesByTag = async () => {
       const q = query(
         collection(db, 'articles'),
-        console.log('articles:', collection(db, 'articles')),
         where('tags', 'array-contains', tagName),
-        // console.log('tagName:', tagName)
       );
       const querySnapshot = await getDocs(q);
       const articlesList = querySnapshot.docs.map(doc => ({
@@ -33,12 +31,12 @@ const TagPage = () => {
   }, [tagName]);
 
   return (
-    <div>
+    <div className="tag-page">
       <h1>Articles with the tag: {tagName}</h1>
       {loading ? (
-        <p>Loading...</p>
+        <p className="loading">Loading...</p>
       ) : (
-        <div>
+        <div className="articles-container">
           {articles.length > 0 ? (
             articles.map((article) => (
               (user && user.uid === article.author.id) || user?.role === 'admin' || article.isPublic ? (
@@ -46,7 +44,7 @@ const TagPage = () => {
               ) : null
             ))
           ) : (
-            <p>No articles found with the tag: {tagName}</p>
+            <p className="no-articles">No articles found with the tag: {tagName}</p>
           )}
         </div>
       )}
