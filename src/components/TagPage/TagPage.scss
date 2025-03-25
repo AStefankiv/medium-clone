@@ -21,10 +21,12 @@
 
   .articles-container {
     display: grid;
+    padding: 20px;
     grid-template-columns: 1fr;
     gap: 20px;
     // justify-items: center;
-    width: 90%;
+    padding: 15px;
+    width: 95%;
   }
 
   .no-articles {

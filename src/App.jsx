@@ -9,7 +9,6 @@ import Article from './pages/Article';
 import CreateArticle from './pages/CreateArticle';
 import AdminRoute from './components/AdminRoute/AdminRoute';
 import AdminPage from './pages/AdminPage';
-import ArticleList from './components/ArticleList/ArticleList';
 import TagPage from'./components/TagPage/TagPage';
 import './App.css'
 
@@ -47,7 +46,6 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/article/:id" element={<Article />} />
               <Route path="/tag/:tagName" element={<TagPage />} />
-              <Route path="/articles" element={<ArticleList />} />
             </Routes>
           </main>
         <Footer />
