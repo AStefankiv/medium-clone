@@ -32,7 +32,7 @@ const TagPage = () => {
 
   return (
     <div className="tag-page">
-      <h1>Articles with the tag: {tagName}</h1>
+      <h1>Articles with the tag:<span className="tag-name">{tagName}</span></h1>
       {loading ? (
         <p className="loading">Loading...</p>
       ) : (
