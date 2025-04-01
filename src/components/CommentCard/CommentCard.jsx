@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './CommentCard.css';
+import './CommentCard.scss';
 import { HighlightFilled } from '@ant-design/icons';
 
 import { useAuth } from '../../context/AuthContext';
