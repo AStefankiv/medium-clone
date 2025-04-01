@@ -1,0 +1,270 @@
+.article {
+  width: 93%;
+  margin: 40px auto;
+  padding: 25px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-family: 'Arial', sans-serif;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  &-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+  }
+
+  &-description {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    text-align: justify;
+    padding: 15px;
+    background: #f0f8ff;
+    border-left: 6px solid #0077cc;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    font-style: italic;
+  }
+
+  &-content {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.7;
+    margin-top: 15px;
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  &-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    margin: 10px 0;
+  }
+
+  &-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+
+    .article-title {
+      flex: 0 0 97%;
+      margin: 0;
+    }
+
+    .heart-icon {
+      width: 10%;
+      max-width: 40px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .like-button {
+      flex: 0 0 3%;
+      font-size: 2.5rem;
+      font-weight: normal;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        background: none;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.line {
+  border-bottom: 3px solid #0077cc;
+  margin: auto;
+}
+
+button {
+  display: inline-block;
+  background: #0077cc;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: #005fa3;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comments {
+  width: 90%;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #222;
+    margin-bottom: 15px;
+  }
+
+  .add-comment {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+
+    button {
+      width: 180px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    textarea {
+      width: 97%;
+      height: 100px;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: none;
+      transition: border 0.3s ease-in-out;
+
+      &:focus {
+        border-color: #0077cc;
+        outline: none;
+      }
+    }
+  }
+
+  .edit-comment {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    .text-area {
+      textarea {
+        width: 100%;
+        height: 80px;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        resize: none;
+      }
+    }
+
+    .save-delete-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      width: 250px;
+
+      button {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+        border-radius: 6px;
+      }
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  h2 {
+    font-size: 1.3rem;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .tag {
+    background-color: #389e0d;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .article, .comments {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .article-title {
+    font-size: 2rem;
+  }
+
+  .article-description {
+    font-size: 1rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}

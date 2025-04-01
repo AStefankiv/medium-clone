@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { doc, getDoc, getDocs, setDoc, addDoc, deleteDoc, collection } from 'firebase/firestore';
-import '../styles/Article.css';
+import '../styles/Article.scss';
 import ArticleEditor from '../components/ArticleEditor/ArticleEditor';
 import { db } from '../firebase/firebase';
 import DOMPurify from 'dompurify';
